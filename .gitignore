@@ -1,0 +1,45 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache/artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Notebook-generated outputs (keep source notebook, ignore generated artifacts)
+notebooks/final_demand_forecast.csv
+notebooks/validation_preds.csv
+notebooks/weather_union_past_future.csv
+notebooks/models/
+
+# Backend runtime artifacts
+backend/__pycache__/
+backend/routes/__pycache__/
+
+# Frontend dependencies/build outputs
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Logs and local env files
+*.log
+.env
+.env.*
+!.env.example
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
