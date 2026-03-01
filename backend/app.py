@@ -4,7 +4,7 @@ import json
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routes import allocation, forecast, health
+from .routes import allocation, forecast, health, pipeline
 from . import allocation as alloc_engine, forecasting, sample_data
 
 
@@ -25,6 +25,7 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(forecast.router)
 app.include_router(allocation.router)
+app.include_router(pipeline.router)
 
 
 if __name__ == "__main__":

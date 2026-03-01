@@ -3,7 +3,7 @@ import ForecastCard from "./ForecastCard.jsx";
 
 export default function ForecastGrid({ forecasts }) {
   if (!forecasts || !forecasts.length) {
-    return <div className="muted">Run the notebook to populate forecasts.</div>;
+    return <div className="muted">Run the forecast + allocation API to populate forecasts.</div>;
   }
   return (
     <div className="forecast-grid">

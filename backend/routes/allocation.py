@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
-from .. import allocation, forecasting, sample_data, schemas, llm_allocation
+from .. import allocation, forecasting, sample_data, schemas
 
 router = APIRouter()
 
@@ -25,16 +25,5 @@ def sample_allocate():
 def allocate(req: schemas.AllocationRequest):
     locations = [s.dict() for s in req.locations]
     plan = allocation.optimize_allocation(req.product_id, req.inbound, locations)
-    plan["variant_id"] = req.variant_id
-    return plan
-
-
-@router.post("/llm/allocation", response_model=schemas.AllocationResponse)
-def allocate_with_llm(req: schemas.AllocationRequest):
-    locations = [s.dict() for s in req.locations]
-    try:
-        plan = llm_allocation.llm_optimize_allocation(req.product_id, req.inbound, locations)
-    except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"LLM allocation failed: {exc}") from exc
     plan["variant_id"] = req.variant_id
     return plan

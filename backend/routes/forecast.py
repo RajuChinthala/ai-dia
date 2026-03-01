@@ -3,6 +3,7 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException
 
 from .. import forecasting, sample_data, schemas, notebook_runner
+from ..helpers import build_history_and_forecast_from_apis
 
 router = APIRouter()
 
@@ -28,6 +29,43 @@ def forecast(req: schemas.ForecastCSVRequest):
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Failed to load forecasts: {exc}") from exc
+    return {"forecasts": [serialize_forecast(r) for r in results]}
+
+
+@router.post("/forecast/api", response_model=schemas.ForecastResponse)
+def forecast_from_apis(req: schemas.ForecastFromAPIsRequest):
+    """
+    Build a merged final dataset from Sales + Weather + Social APIs and run forecasting.
+    This is notebook-free and uses the same forecast engine used by pipeline option 1.
+    """
+    try:
+        data = build_history_and_forecast_from_apis(
+            product_id=req.product_id,
+            location_ids=req.location_ids,
+            sales_api_url=req.sales_api_url,
+            weather_api_url=req.weather_api_url,
+            social_api_url=req.social_api_url,
+            horizon=req.horizon,
+            api_timeout_sec=req.api_timeout_sec,
+            retry_max=req.retry_max,
+            retry_backoff_sec=req.retry_backoff_sec,
+        )
+
+        history = data["history"]
+        if not history:
+            raise HTTPException(
+                status_code=404,
+                detail=(
+                    "No merged rows could be generated from source APIs. "
+                    "Ensure sales rows include date, product_id, location_id, and units."
+                ),
+            )
+        results = data["forecasts"]
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"API forecast failed: {exc}") from exc
+
     return {"forecasts": [serialize_forecast(r) for r in results]}
 
 

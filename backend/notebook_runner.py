@@ -44,10 +44,15 @@ def run_notebook(
     os.environ["PYTHONPATH"] = os.pathsep.join(pythonpath_parts)
     try:
         nb = nbformat.read(nb_path, as_version=4)
+        kernel_name = (
+            nb.get("metadata", {})
+            .get("kernelspec", {})
+            .get("name", "python3")
+        )
         client = NotebookClient(
             nb,
             timeout=timeout,
-            kernel_name="python3",
+            kernel_name=kernel_name,
             resources={"metadata": {"path": str(exec_dir)}},
         )
         client.execute()

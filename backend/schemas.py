@@ -20,6 +20,18 @@ class ForecastResponse(BaseModel):
     forecasts: List[Dict]
 
 
+class ForecastFromAPIsRequest(BaseModel):
+    product_id: str = Field(..., description="Product/SKU identifier")
+    location_ids: List[int] = Field(default_factory=list, description="Optional location filter")
+    sales_api_url: str = Field(..., description="Sales history API URL")
+    weather_api_url: str = Field(..., description="Weather signal API URL")
+    social_api_url: str = Field(..., description="Social trends API URL")
+    horizon: int = Field(7, ge=1, le=60, description="Forecast horizon in days")
+    api_timeout_sec: int = Field(15, ge=2, le=120)
+    retry_max: int = Field(3, ge=0, le=8)
+    retry_backoff_sec: float = Field(0.5, ge=0.1, le=30.0)
+
+
 class LocationInput(BaseModel):
     location_id: int = Field(..., description="BigCommerce location id")
     location_name: Optional[str] = None
@@ -76,3 +88,60 @@ class NotebookForecastResponse(BaseModel):
     final_sheet_path: str
     forecast_column: str
     summary: Dict
+
+
+class HistoryRow(BaseModel):
+    date: str
+    product_id: str
+    location_id: int
+    units: float = 0.0
+    social_signal: float = 0.0
+    weather_score: float = 0.0
+    event_score: float = 0.0
+
+
+class AgentPipelineRequest(BaseModel):
+    product_id: str
+    variant_id: Optional[int] = Field(None, description="Variant id for ATS updates")
+    inbound: int = Field(..., ge=0, description="Units inbound from vendor/DC")
+    locations: List[LocationInput]
+    history: List[HistoryRow] = Field(default_factory=list, description="Optional override history rows")
+    horizon: int = Field(7, ge=1, le=60, description="Forecast horizon in days")
+    sales_api_url: Optional[str] = Field(None, description="Sales history API endpoint")
+    weather_api_url: Optional[str] = Field(None, description="Weather signal API endpoint")
+    seasonal_api_url: Optional[str] = Field(None, description="Seasonal/event trend API endpoint")
+    social_api_url: Optional[str] = Field(
+        None,
+        description="Deprecated alias for seasonal_api_url",
+    )
+    api_timeout_sec: int = Field(15, ge=2, le=120, description="Per-request timeout for source APIs")
+    retry_max: int = Field(3, ge=0, le=8, description="Max retries for transient API failures")
+    retry_backoff_sec: float = Field(
+        0.5,
+        ge=0.1,
+        le=30.0,
+        description="Initial retry backoff in seconds; exponential backoff with jitter-like growth",
+    )
+
+
+class AgentSignals(BaseModel):
+    location_id: int
+    sales_base_daily: float
+    sales_trend_daily: float
+    seasonal_weekly_delta: float
+    weather_daily_impact: float
+    social_daily_impact: float
+    final_daily_forecast: float
+    final_period_forecast: int
+
+
+class AgentPipelineResponse(BaseModel):
+    product_id: str
+    variant_id: Optional[int] = None
+    horizon: int
+    allocation_mode: str
+    specialist_outputs: List[AgentSignals]
+    allocations: List[Dict]
+    inbound_remaining: int
+    estimated_total_cost: float
+    fill_rate: float

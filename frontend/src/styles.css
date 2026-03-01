@@ -93,6 +93,12 @@ body {
   margin-top: 10px;
 }
 
+.field-row-single {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
 .label {
   color: var(--muted);
   font-size: 12px;
