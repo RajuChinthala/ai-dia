@@ -4,11 +4,15 @@ import json
 import os
 import re
 import time
+import ast
 from dataclasses import dataclass
+from urllib.parse import urlparse
 from pathlib import Path
 from typing import Dict, List
 
 import requests
+
+from . import chroma_memory
 
 
 def _moving_average(values: List[float], window: int) -> float:
@@ -47,14 +51,26 @@ class LLMConfig:
     retry_backoff_sec: float
     request_max_sec: int
     retry_after_cap_sec: float
+    max_tokens: int
 
 
 _ENDPOINT_CACHE: Dict[str, str] = {}
 
 
 def _is_local_base(api_base: str) -> bool:
-    lowered = (api_base or "").lower()
-    return "localhost" in lowered or "127.0.0.1" in lowered
+    lowered = (api_base or "").lower().strip()
+    if not lowered:
+        return False
+
+    if "localhost" in lowered or "127.0.0.1" in lowered or "ollama" in lowered:
+        return True
+
+    try:
+        host = (urlparse(lowered).hostname or "").lower()
+    except Exception:
+        host = ""
+
+    return host in {"localhost", "127.0.0.1", "ollama"}
 
 
 def _normalize_api_base(api_base: str) -> str:
@@ -142,7 +158,8 @@ def _load_config() -> LLMConfig:
             "or set USE_LOCAL_MODEL=true with LOCAL_LLM_API_BASE/LOCAL_LLM_MODEL for local Ollama."
         )
 
-    timeout_raw = _get_config_value("LLM_TIMEOUT_SEC", "45")
+    timeout_default = "90" if _is_local_base(api_base) else "45"
+    timeout_raw = _get_config_value("LLM_TIMEOUT_SEC", timeout_default)
     try:
         timeout_sec = max(5, int(timeout_raw))
     except ValueError:
@@ -160,7 +177,8 @@ def _load_config() -> LLMConfig:
     except ValueError:
         retry_backoff_sec = 1.0
 
-    request_max_raw = _get_config_value("LLM_REQUEST_MAX_SEC", "75")
+    request_max_default = "180" if _is_local_base(api_base) else "75"
+    request_max_raw = _get_config_value("LLM_REQUEST_MAX_SEC", request_max_default)
     try:
         request_max_sec = min(max(int(request_max_raw), 10), 600)
     except ValueError:
@@ -172,6 +190,13 @@ def _load_config() -> LLMConfig:
     except ValueError:
         retry_after_cap_sec = 8.0
 
+    max_tokens_default = "2048" if _is_local_base(api_base) else "512"
+    max_tokens_raw = _get_config_value("LLM_MAX_TOKENS", max_tokens_default)
+    try:
+        max_tokens = min(max(int(max_tokens_raw), 64), 4096)
+    except ValueError:
+        max_tokens = 2048 if _is_local_base(api_base) else 512
+
     return LLMConfig(
         api_key=api_key,
         api_base=api_base,
@@ -181,11 +206,74 @@ def _load_config() -> LLMConfig:
         retry_backoff_sec=retry_backoff_sec,
         request_max_sec=request_max_sec,
         retry_after_cap_sec=retry_after_cap_sec,
+        max_tokens=max_tokens,
     )
 
 
-def _extract_json_object(text: str) -> Dict:
-    text = text.strip()
+def _strip_json_fences(text: str) -> str:
+    stripped = (text or "").strip()
+    fence_match = re.match(r"^```(?:json)?\s*([\s\S]*?)\s*```$", stripped, flags=re.IGNORECASE)
+    if fence_match:
+        return fence_match.group(1).strip()
+    return stripped
+
+
+def _extract_braced_candidates(text: str) -> List[str]:
+    candidates: List[str] = []
+    stack: List[int] = []
+
+    for index, ch in enumerate(text):
+        if ch == "{":
+            stack.append(index)
+        elif ch == "}" and stack:
+            start = stack.pop()
+            if not stack:
+                candidates.append(text[start : index + 1])
+
+    return candidates
+
+
+def _close_truncated_json(text: str) -> str:
+    stack: List[str] = []
+    in_string = False
+    escaped = False
+
+    for ch in text:
+        if in_string:
+            if escaped:
+                escaped = False
+                continue
+            if ch == "\\":
+                escaped = True
+                continue
+            if ch == '"':
+                in_string = False
+            continue
+
+        if ch == '"':
+            in_string = True
+        elif ch == "{":
+            stack.append("}")
+        elif ch == "[":
+            stack.append("]")
+        elif ch == "}" and stack and stack[-1] == "}":
+            stack.pop()
+        elif ch == "]" and stack and stack[-1] == "]":
+            stack.pop()
+
+    fixed = text
+    if in_string:
+        fixed += '"'
+    if stack:
+        fixed += "".join(reversed(stack))
+    return fixed
+
+
+def _try_parse_object(raw_text: str) -> Dict | None:
+    text = (raw_text or "").strip()
+    if not text:
+        return None
+
     try:
         parsed = json.loads(text)
         if isinstance(parsed, dict):
@@ -193,14 +281,49 @@ def _extract_json_object(text: str) -> Dict:
     except Exception:
         pass
 
-    match = re.search(r"\{[\s\S]*\}", text)
-    if not match:
-        raise ValueError("LLM response did not include a valid JSON object.")
+    without_trailing_commas = re.sub(r",(\s*[}\]])", r"\1", text)
+    if without_trailing_commas != text:
+        try:
+            parsed = json.loads(without_trailing_commas)
+            if isinstance(parsed, dict):
+                return parsed
+        except Exception:
+            pass
 
-    parsed = json.loads(match.group(0))
-    if not isinstance(parsed, dict):
-        raise ValueError("LLM JSON payload must be an object.")
-    return parsed
+    try:
+        parsed = ast.literal_eval(text)
+        if isinstance(parsed, dict):
+            return parsed
+    except Exception:
+        pass
+
+    repaired = _close_truncated_json(text)
+    if repaired != text:
+        try:
+            parsed = json.loads(repaired)
+            if isinstance(parsed, dict):
+                return parsed
+        except Exception:
+            pass
+
+    return None
+
+
+def _extract_json_object(text: str) -> Dict:
+    normalized = _strip_json_fences(text)
+
+    parsed = _try_parse_object(normalized)
+    if isinstance(parsed, dict):
+        return parsed
+
+    candidates = _extract_braced_candidates(normalized)
+    for candidate in candidates:
+        parsed = _try_parse_object(candidate)
+        if isinstance(parsed, dict):
+            return parsed
+
+    excerpt = normalized[:200].replace("\n", " ")
+    raise ValueError(f"LLM response did not include a valid JSON object. excerpt='{excerpt}'")
 
 
 def _retry_after_seconds(response: requests.Response) -> float:
@@ -224,6 +347,10 @@ def _response_detail(response: requests.Response) -> str:
 def _candidate_endpoints(api_base: str) -> List[str]:
     trimmed = (api_base or "").rstrip("/")
     lowered = trimmed.lower()
+    allow_generate_fallback = _as_bool(
+        _get_config_value("LLM_ALLOW_GENERATE_FALLBACK", "false"),
+        default=False,
+    )
 
     if lowered.endswith("/v1/chat/completions") or lowered.endswith("/api/chat") or lowered.endswith("/api/generate"):
         return [trimmed]
@@ -235,17 +362,13 @@ def _candidate_endpoints(api_base: str) -> List[str]:
             candidates = [f"{trimmed}/v1/chat/completions"]
     elif lowered.endswith("/v1"):
         base_root = trimmed[: -len("/v1")]
-        candidates = [
-            f"{trimmed}/chat/completions",
-            f"{base_root}/api/chat",
-            f"{base_root}/api/generate",
-        ]
+        candidates = [f"{trimmed}/chat/completions", f"{base_root}/api/chat"]
+        if allow_generate_fallback:
+            candidates.append(f"{base_root}/api/generate")
     else:
-        candidates = [
-            f"{trimmed}/api/chat",
-            f"{trimmed}/v1/chat/completions",
-            f"{trimmed}/api/generate",
-        ]
+        candidates = [f"{trimmed}/api/chat", f"{trimmed}/v1/chat/completions"]
+        if allow_generate_fallback:
+            candidates.append(f"{trimmed}/api/generate")
 
     cache_key = lowered
     cached = _ENDPOINT_CACHE.get(cache_key)
@@ -263,21 +386,45 @@ def _build_messages(system_prompt: str, user_payload: Dict) -> List[Dict]:
     ]
 
 
-def _build_request_payload(endpoint: str, model: str, messages: List[Dict]) -> Dict:
-    if endpoint.lower().endswith("/api/generate"):
+def _build_request_payload(endpoint: str, model: str, messages: List[Dict], max_tokens: int) -> Dict:
+    lowered = endpoint.lower()
+    is_local_endpoint = _is_local_base(endpoint)
+
+    if lowered.endswith("/api/generate"):
         prompt = "\n".join(f"{message['role']}: {message['content']}" for message in messages)
         return {
             "model": model,
             "prompt": prompt,
+            "format": "json",
+            "options": {
+                "num_predict": max_tokens,
+                "temperature": 0.1,
+            },
             "stream": False,
         }
 
-    return {
+    if lowered.endswith("/api/chat"):
+        return {
+            "model": model,
+            "messages": messages,
+            "format": "json",
+            "options": {
+                "num_predict": max_tokens,
+                "temperature": 0.1,
+            },
+            "stream": False,
+        }
+
+    payload = {
         "model": model,
         "messages": messages,
         "temperature": 0.1,
+        "max_tokens": max_tokens,
         "stream": False,
     }
+    if is_local_endpoint and lowered.endswith("/v1/chat/completions"):
+        payload["response_format"] = {"type": "json_object"}
+    return payload
 
 
 def _extract_content_from_payload(payload: Dict, endpoint: str) -> str:
@@ -347,7 +494,7 @@ def _chat_json(*, cfg: LLMConfig, system_prompt: str, user_payload: Dict) -> Dic
 
     last_error = ""
     for endpoint in _candidate_endpoints(cfg.api_base):
-        body = _build_request_payload(endpoint, cfg.model, messages)
+        body = _build_request_payload(endpoint, cfg.model, messages, cfg.max_tokens)
         response = None
         endpoint_failed = False
 
@@ -387,7 +534,8 @@ def _chat_json(*, cfg: LLMConfig, system_prompt: str, user_payload: Dict) -> Dic
                 continue
 
             if response.status_code == 404:
-                last_error = f"{endpoint}: 404 not found"
+                detail = _response_detail(response)
+                last_error = f"{endpoint}: 404 not found: {detail}"
                 endpoint_failed = True
                 break
 
@@ -428,9 +576,21 @@ def _chat_json(*, cfg: LLMConfig, system_prompt: str, user_payload: Dict) -> Dic
                     break
                 continue
 
-            content = _extract_content_from_payload(payload, endpoint)
+            try:
+                content = _extract_content_from_payload(payload, endpoint)
+                parsed = _extract_json_object(str(content))
+            except ValueError as exc:
+                last_error = f"{endpoint}: parse error: {exc}"
+                endpoint_failed = True
+                if attempt >= cfg.retry_max:
+                    break
+                if not _sleep_with_budget(cfg.retry_backoff_sec * (2 ** attempt)):
+                    last_error = f"{endpoint}: request timed out after {cfg.request_max_sec}s budget"
+                    break
+                continue
+
             _ENDPOINT_CACHE[cache_key] = endpoint
-            return _extract_json_object(str(content))
+            return parsed
 
         if endpoint_failed and _ENDPOINT_CACHE.get(cache_key) == endpoint:
             _ENDPOINT_CACHE.pop(cache_key, None)
@@ -438,8 +598,10 @@ def _chat_json(*, cfg: LLMConfig, system_prompt: str, user_payload: Dict) -> Dic
     raise ValueError(
         "LLM request failed across candidate endpoints. "
         f"base='{cfg.api_base}', model='{cfg.model}', last_error='{last_error}'. "
-        "If using OpenAI, use LLM_API_BASE='https://api.openai.com/v1' and an OpenAI model. "
-        "If using local Ollama, use LLM_API_BASE='http://localhost:11434' (or '/v1') and model 'llama3.2:3b'."
+        "If using OpenAI, set USE_LOCAL_MODEL=false, LLM_API_BASE='https://api.openai.com/v1', and an OpenAI model. "
+        "If using local Ollama, set USE_LOCAL_MODEL=true, LOCAL_LLM_API_BASE='http://localhost:11434' (or '/v1'), "
+        "LOCAL_LLM_MODEL='llama3.2:3b', ensure 'ollama serve' is running and the model is pulled, and increase "
+        "LLM_REQUEST_MAX_SEC/LLM_TIMEOUT_SEC for slow first-run model loads."
     )
 
 
@@ -614,6 +776,14 @@ def run_llm_orchestrated_pipeline(
     if not summary:
         raise ValueError("No history rows matched product_id for LLM pipeline.")
 
+    similar_cases = chroma_memory.query_similar_runs(
+        product_id=product_id,
+        horizon=horizon,
+        inbound=inbound,
+        summary=summary,
+        locations=locations,
+    )
+
     forecast_system = (
         "You are a forecasting specialist. Return ONLY valid JSON with key 'specialist_outputs'. "
         "Each item must include: location_id, sales_base_daily, sales_trend_daily, "
@@ -625,6 +795,7 @@ def run_llm_orchestrated_pipeline(
         "product_id": product_id,
         "horizon": horizon,
         "history_summary": summary,
+        "similar_cases": similar_cases,
         "locations": [
             {
                 "location_id": int(loc["location_id"]),
@@ -658,6 +829,7 @@ def run_llm_orchestrated_pipeline(
         "product_id": product_id,
         "inbound": int(inbound),
         "horizon": horizon,
+        "similar_cases": similar_cases,
         "locations": [
             {
                 "location_id": int(loc["location_id"]),
@@ -681,6 +853,17 @@ def run_llm_orchestrated_pipeline(
         llm_result=allocation_raw,
         locations=enriched_locations,
         inbound=inbound,
+    )
+
+    chroma_memory.upsert_run_memory(
+        product_id=product_id,
+        horizon=horizon,
+        inbound=inbound,
+        summary=summary,
+        locations=enriched_locations,
+        specialist_outputs=specialist_outputs,
+        allocations=allocation_result["allocations"],
+        fill_rate=float(allocation_result["fill_rate"]),
     )
 
     return {

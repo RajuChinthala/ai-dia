@@ -151,7 +151,7 @@ class TestAgentPipelineApi(unittest.TestCase):
             "allocation_mode": "llm",
             "specialist_outputs": [],
             "allocations": [],
-            "inbound_remaining": 300,
+            "inbound_remaining": 300,nnnnn 
             "estimated_total_cost": 0.0,
             "fill_rate": 0.0,
         }

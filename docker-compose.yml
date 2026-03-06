@@ -1,0 +1,76 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ai-dia-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: ai-dia-ollama-init
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        until ollama list >/dev/null 2>&1; do
+          echo "waiting for ollama..."
+          sleep 2
+        done
+        ollama pull llama3.2:3b
+    restart: "no"
+
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: ai-dia-chroma
+    ports:
+      - "8001:8000"
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ALLOW_RESET=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-dia-api
+    depends_on:
+      - ollama
+      - ollama-init
+      - chroma
+    ports:
+      - "8000:8000"
+    environment:
+      - ENABLE_CHROMA_MEMORY=true
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+      - CHROMA_COLLECTION=agent_flow_runs
+      - CHROMA_TOP_K=3
+      - USE_LOCAL_MODEL=true
+      - LOCAL_LLM_API_BASE=http://ollama:11434
+      - LOCAL_LLM_MODEL=llama3.2:3b
+      - LLM_TIMEOUT_SEC=150
+      - LLM_REQUEST_MAX_SEC=420
+      - LLM_MAX_TOKENS=1024
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    container_name: ai-dia-frontend
+    depends_on:
+      - api
+    ports:
+      - "5173:80"
+
+volumes:
+  ollama_data:
+  chroma_data:

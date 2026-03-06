@@ -2,11 +2,16 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
 
-from .. import llm_pipeline, schemas
+from .. import chroma_memory, llm_pipeline, schemas
 from ..api_calls.config import get_source_api_config
 from ..helpers import build_history_and_forecast_from_apis
 
 router = APIRouter()
+
+
+@router.get("/pipeline/memory/health")
+def memory_health():
+    return chroma_memory.get_memory_health()
 
 
 @router.post("/pipeline/agent_forecast_allocate", response_model=schemas.AgentPipelineResponse)

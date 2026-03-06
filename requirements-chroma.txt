@@ -1,0 +1,4 @@
+# Optional dependencies for ChromaDB memory support in agent flow
+# Install only if you want vector memory enabled.
+
+chromadb==0.5.23

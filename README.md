@@ -80,6 +80,83 @@ python -m unittest tests/test_agent_pipeline_flow.py tests/test_agent_pipeline_a
 ```
 Validates deterministic flow and HTTP endpoint orchestration paths.
 
+## Optional: ChromaDB install
+
+Chroma memory integration is implemented in code but kept as an optional dependency so base installs work on Windows without C++ toolchain.
+
+Install optional Chroma deps:
+
+```bash
+pip install -r requirements-chroma.txt
+```
+
+Windows note:
+
+- If install fails with `Microsoft Visual C++ 14.0 or greater is required`, install **Microsoft C++ Build Tools** and retry.
+- If you do not install Chroma, the pipeline still runs; memory retrieval/upsert gracefully no-ops.
+
+## Docker (API + ChromaDB + Ollama)
+
+Run the backend and Chroma as containers:
+
+```bash
+docker compose up --build
+```
+
+Run with Vite dev frontend (hot reload):
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```
+
+Services:
+
+- API: `http://localhost:8000`
+- Chroma: `http://localhost:8001`
+- Ollama: `http://localhost:11434`
+- UI: `http://localhost:5173`
+- Memory health: `GET http://localhost:8000/pipeline/memory/health`
+
+Notes:
+
+- `api` container is preconfigured with `CHROMA_HOST=chroma` and uses Chroma server mode.
+- `ollama` container provides local model inference for API (`LOCAL_LLM_API_BASE=http://ollama:11434`).
+- `ollama-init` one-shot service auto-pulls `llama3.2:3b` on startup (via `OLLAMA_HOST=http://ollama:11434`).
+- `frontend` container runs in production mode (Vite build + Nginx static serve).
+- Nginx proxies `/api` to `api` service inside Docker network.
+- `chroma_data` Docker volume persists vector memory.
+- `ollama_data` Docker volume persists pulled models.
+- Compose defaults for containerized Ollama are tuned for stability: `LLM_TIMEOUT_SEC=150`, `LLM_REQUEST_MAX_SEC=420`, `LLM_MAX_TOKENS=1024`.
+
+Manual model pull (optional, if you want to re-pull/update):
+
+```bash
+docker compose exec ollama ollama pull llama3.2:3b
+```
+
+Optional check:
+
+```bash
+docker compose exec ollama ollama list
+```
+
+Optional frontend dev mode (instead of production target):
+
+```bash
+docker build -f frontend/Dockerfile --target development -t ai-dia-frontend-dev ./frontend
+```
+
+Useful commands:
+
+```bash
+docker compose down
+docker compose down -v
+docker compose restart api
+```
+
+- `down` keeps Chroma data volume.
+- `down -v` removes persisted Chroma data.
+
 ## Notes
 
 - Data model is aligned to **BigCommerce Inventory API**: `product_id`, optional `variant_id`, `location_id`, `inventory_level` (ATS per location), safety stock, capacity, shipping cost, and service level.
@@ -127,15 +204,14 @@ The agent pipeline always uses LLM for both forecast and allocation.
 
 ### Required env vars
 
-- `LLM_API_KEY` (or `OPENAI_API_KEY`) for hosted providers like OpenAI
-- For local Ollama (`localhost`/`127.0.0.1`), key is optional
-- Optional:
-   - `USE_LOCAL_MODEL` (`true`/`false`, default `false`)
-   - `LLM_API_BASE` (default `https://api.openai.com/v1`)
-   - `LLM_MODEL` (default `gpt-4o-mini`)
-   - `LLM_TIMEOUT_SEC` (default `45`)
-   - `LLM_RETRY_MAX` (default `3`)
-   - `LLM_RETRY_BACKOFF_SEC` (default `1.0`)
+- `USE_LOCAL_MODEL` (`true`/`false`, default `false`)
+- `LLM_API_BASE` (default `https://api.openai.com/v1`)
+- `LLM_MODEL` (default `gpt-4o-mini`)
+- `LLM_TIMEOUT_SEC` (default `45`, local defaults are higher)
+- `LLM_REQUEST_MAX_SEC` (default `75`, local defaults are higher)
+- `LLM_RETRY_MAX` (default `3`)
+- `LLM_RETRY_BACKOFF_SEC` (default `1.0`)
+- `LLM_MAX_TOKENS` (default `512`, local defaults are higher)
 
 ### Local Ollama setup
 
@@ -144,7 +220,10 @@ Use these values in `.env` when Ollama is running locally:
 - `USE_LOCAL_MODEL=true`
 - `LOCAL_LLM_API_BASE=http://localhost:11434`
 - `LOCAL_LLM_MODEL=llama3.2:3b`
-- `LOCAL_LLM_API_KEY=` (optional for local)
+- `LOCAL_LLM_API_KEY=` (optional)
+- `LLM_TIMEOUT_SEC=90`
+- `LLM_REQUEST_MAX_SEC=180`
+- `LLM_MAX_TOKENS=2048`
 
 For hosted providers (OpenAI), set `USE_LOCAL_MODEL=false` and use:
 
@@ -154,11 +233,30 @@ For hosted providers (OpenAI), set `USE_LOCAL_MODEL=false` and use:
 
 ### Request behavior
 
-- Provide `history[]` directly, or provide source URLs (`sales_api_url`, `weather_api_url`, `seasonal_api_url`) so backend can build history.
+- Provide `history[]` directly, or provide source API URLs so backend can build history.
 - If no merged history is produced from APIs, endpoint returns `404`.
+
+### ChromaDB memory (agent flow)
+
+- `ENABLE_CHROMA_MEMORY=true` (default)
+- `CHROMA_PERSIST_DIR=data/chroma`
+- `CHROMA_COLLECTION=agent_flow_runs`
+- `CHROMA_TOP_K=3`
+- `CHROMA_HOST` (optional; when set, uses remote Chroma server mode)
+- `CHROMA_PORT=8000`
+- `CHROMA_SSL=false`
+
+Behavior:
+
+- Pipeline queries similar prior runs (same `product_id`) and injects them as `similar_cases` into LLM prompts.
+- Pipeline upserts final run context and outputs into Chroma for future retrieval.
 
 Implementation notes:
 
-- API fetching is split into dedicated modules under `backend/api_calls/`.
-- Signal merging and normalization is centralized in `backend/helpers/merge_history.py`.
-- The same merged final dataset drives forecasting in `/forecast/api` and pipeline option 1 when `history[]` is omitted.
+- Chroma integration is optional and gracefully no-ops if dependency is unavailable.
+
+If you see timeout errors on first request (model cold start), increase:
+
+- `LLM_REQUEST_MAX_SEC=180`
+- `LLM_TIMEOUT_SEC=90`
+
