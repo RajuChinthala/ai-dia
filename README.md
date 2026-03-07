@@ -166,18 +166,18 @@ docker compose restart api
 
 ## Agent orchestration pattern
 
-`POST /pipeline/agent_forecast_allocate` now uses a **single LLM pipeline**:
+`POST /pipeline/agent_forecast_allocate` now uses a **RAG pipeline**:
 
-1. Load history from source APIs (sales + weather + seasonal trend), unless `history[]` is provided.
-2. Forecast LLM generates per-location demand signals and horizon forecast.
-3. Allocation LLM consumes the forecast output and generates final allocations.
+1. Retrieve: query Chroma memory for semantically similar prior runs.
+2. Augment: build retrieval context (`retrieved_cases` + retrieval insights) and add it to prompts.
+3. Generate: run forecast and allocation LLM stages grounded in retrieved context.
 
 Request highlights:
 
 - Source APIs are resolved from backend configuration (`backend/api_calls/config.py`) when not provided in request.
 - Optional override in request: `sales_api_url`, `weather_api_url`, `seasonal_api_url`.
 - Optional alias: `social_api_url` (deprecated alias for `seasonal_api_url`).
-- Optional: `history[]` to bypass API fetch and directly run LLM stages.
+- Optional: `history[]` to bypass API fetch and directly run RAG stages.
 - `horizon`: forecast horizon in days.
 - Built-in source API resilience: retries, 429 handling (`Retry-After`), and normalized weather/social features.
 - Notebook-equivalent built-ins:
@@ -195,12 +195,14 @@ Response highlights:
 
 - `specialist_outputs[]` contains each specialist signal plus final demand forecast by location.
 - Allocation decision fields (`allocations`, `inbound_remaining`, `estimated_total_cost`, `fill_rate`).
+- `retrieval_context` contains query metadata, compact retrieved cases, and retrieval summary insights.
+- `allocation_mode` remains `llm` for backward compatibility (the flow is retrieval-augmented internally).
 
-This gives you LLM-based forecast and LLM-based allocation in one endpoint.
+This gives you retrieval-grounded forecast and allocation in one endpoint.
 
 ## LLM setup
 
-The agent pipeline always uses LLM for both forecast and allocation.
+The RAG pipeline uses LLM for generation and Chroma memory for retrieval.
 
 ### Required env vars
 
@@ -248,7 +250,8 @@ For hosted providers (OpenAI), set `USE_LOCAL_MODEL=false` and use:
 
 Behavior:
 
-- Pipeline queries similar prior runs (same `product_id`) and injects them as `similar_cases` into LLM prompts.
+- Pipeline first queries similar prior runs for the same `product_id`; if no records exist, it falls back to broader semantic retrieval.
+- Pipeline injects retrieval context into both forecast and allocation prompts.
 - Pipeline upserts final run context and outputs into Chroma for future retrieval.
 
 Implementation notes:

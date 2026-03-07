@@ -145,3 +145,4 @@ class AgentPipelineResponse(BaseModel):
     inbound_remaining: int
     estimated_total_cost: float
     fill_rate: float
+    retrieval_context: Optional[Dict] = None

@@ -158,14 +158,25 @@ def query_similar_runs(
         locations=locations,
     )
 
-    try:
-        result = collection.query(
-            query_texts=[query_text],
-            n_results=_top_k(),
-            where={"product_id": str(product_id)},
-            include=["documents", "metadatas", "distances"],
-        )
-    except Exception:
+    def _safe_query(where: Dict | None) -> Dict | None:
+        kwargs = {
+            "query_texts": [query_text],
+            "n_results": _top_k(),
+            "include": ["documents", "metadatas", "distances"],
+        }
+        if where is not None:
+            kwargs["where"] = where
+        try:
+            return collection.query(**kwargs)
+        except Exception:
+            return None
+
+    # First prefer the same product history. If that is sparse, broaden retrieval.
+    result = _safe_query({"product_id": str(product_id)})
+    docs = ((result or {}).get("documents") or [[]])[0]
+    if not docs:
+        result = _safe_query(None)
+    if result is None:
         return []
 
     documents = (result.get("documents") or [[]])[0]

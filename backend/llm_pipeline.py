@@ -760,7 +760,63 @@ def _sanitize_allocations(*, llm_result: Dict, locations: List[Dict], inbound: i
     }
 
 
-def run_llm_orchestrated_pipeline(
+def _compact_retrieved_cases(similar_cases: List[Dict], limit: int = 3) -> List[Dict]:
+    compact: List[Dict] = []
+    for row in similar_cases[:limit]:
+        metadata = row.get("metadata") if isinstance(row, dict) else {}
+        record = row.get("record") if isinstance(row, dict) else {}
+        allocations = record.get("allocations", []) if isinstance(record, dict) else []
+        specialist_outputs = record.get("specialist_outputs", []) if isinstance(record, dict) else []
+        compact.append(
+            {
+                "distance": _to_float(row.get("distance"), -1.0),
+                "product_id": str((metadata or {}).get("product_id") or (record or {}).get("product_id") or ""),
+                "horizon": _to_int((metadata or {}).get("horizon"), _to_int((record or {}).get("horizon"), 0)),
+                "inbound": _to_int((metadata or {}).get("inbound"), _to_int((record or {}).get("inbound"), 0)),
+                "fill_rate": round(
+                    _to_float((metadata or {}).get("fill_rate"), _to_float((record or {}).get("fill_rate"), 0.0)),
+                    3,
+                ),
+                "allocations": allocations[:5] if isinstance(allocations, list) else [],
+                "specialist_outputs": specialist_outputs[:5] if isinstance(specialist_outputs, list) else [],
+            }
+        )
+    return compact
+
+
+def _build_retrieval_context(
+    *,
+    product_id: str,
+    horizon: int,
+    inbound: int,
+    summary: List[Dict],
+    locations: List[Dict],
+    similar_cases: List[Dict],
+) -> Dict:
+    compact_cases = _compact_retrieved_cases(similar_cases, limit=3)
+
+    avg_units = [_to_float(row.get("avg_units_7d"), 0.0) for row in summary]
+    trend_values = [_to_float(row.get("trend_daily"), 0.0) for row in summary]
+    retrieval_insights = [
+        f"retrieved_case_count={len(compact_cases)}",
+        f"summary_location_count={len(summary)}",
+        f"avg_units_7d_mean={round(sum(avg_units) / len(avg_units), 3) if avg_units else 0.0}",
+        f"trend_mean={round(sum(trend_values) / len(trend_values), 3) if trend_values else 0.0}",
+    ]
+
+    return {
+        "query": {
+            "product_id": str(product_id),
+            "horizon": int(horizon),
+            "inbound": int(inbound),
+            "location_count": len(locations),
+        },
+        "retrieved_cases": compact_cases,
+        "retrieval_insights": retrieval_insights,
+    }
+
+
+def run_rag_orchestrated_pipeline(
     *,
     product_id: str,
     inbound: int,
@@ -769,33 +825,43 @@ def run_llm_orchestrated_pipeline(
     horizon: int = 7,
 ) -> Dict:
     if not history:
-        raise ValueError("LLM pipeline requires non-empty history with sales/weather/social signals.")
+        raise ValueError("RAG pipeline requires non-empty history with sales/weather/social signals.")
 
     cfg = _load_config()
     summary = _history_summary(history, product_id)
     if not summary:
-        raise ValueError("No history rows matched product_id for LLM pipeline.")
+        raise ValueError("No history rows matched product_id for RAG pipeline.")
 
-    similar_cases = chroma_memory.query_similar_runs(
+    retrieved_rows = chroma_memory.query_similar_runs(
         product_id=product_id,
         horizon=horizon,
         inbound=inbound,
         summary=summary,
         locations=locations,
     )
+    retrieval_context = _build_retrieval_context(
+        product_id=product_id,
+        horizon=horizon,
+        inbound=inbound,
+        summary=summary,
+        locations=locations,
+        similar_cases=retrieved_rows,
+    )
 
     forecast_system = (
-        "You are a forecasting specialist. Return ONLY valid JSON with key 'specialist_outputs'. "
+        "You are a forecasting specialist in a Retrieval-Augmented Generation (RAG) pipeline. "
+        "Use retrieved_cases and retrieval_insights as supporting context, but adapt to the current query. "
+        "Return ONLY valid JSON with key 'specialist_outputs'. "
         "Each item must include: location_id, sales_base_daily, sales_trend_daily, "
         "seasonal_weekly_delta, weather_daily_impact, social_daily_impact, "
         "final_daily_forecast, final_period_forecast."
     )
     forecast_user = {
-        "task": "Use sales, weather, social, and event hints to forecast by location.",
+        "task": "Forecast by location using history summaries + retrieved prior cases.",
         "product_id": product_id,
         "horizon": horizon,
         "history_summary": summary,
-        "similar_cases": similar_cases,
+        "retrieval_context": retrieval_context,
         "locations": [
             {
                 "location_id": int(loc["location_id"]),
@@ -820,16 +886,17 @@ def run_llm_orchestrated_pipeline(
         loc["demand_forecast"] = int(by_loc.get(loc_id, {}).get("final_period_forecast", 0))
 
     allocation_system = (
-        "You are an inventory allocation specialist. Return ONLY valid JSON with keys: "
-        "allocations (list of location_id, quantity, rationale, estimated_cost), fill_rate. "
+        "You are an allocation specialist in a Retrieval-Augmented Generation (RAG) pipeline. "
+        "Use the retrieved cases as references and optimize for current demand and constraints. "
+        "Return ONLY valid JSON with keys: allocations (list of location_id, quantity, rationale, estimated_cost), fill_rate. "
         "Positive quantity means inbound assigned to location; negative means transfer out."
     )
     allocation_user = {
-        "task": "Allocate inbound inventory across locations to maximize service while controlling cost.",
+        "task": "Allocate inbound inventory using forecast + retrieved prior allocations.",
         "product_id": product_id,
         "inbound": int(inbound),
         "horizon": horizon,
-        "similar_cases": similar_cases,
+        "retrieval_context": retrieval_context,
         "locations": [
             {
                 "location_id": int(loc["location_id"]),
@@ -869,10 +936,30 @@ def run_llm_orchestrated_pipeline(
     return {
         "product_id": product_id,
         "horizon": horizon,
+        # Keep backward-compatible mode label for existing clients.
         "allocation_mode": "llm",
         "specialist_outputs": specialist_outputs,
         "allocations": allocation_result["allocations"],
         "inbound_remaining": allocation_result["inbound_remaining"],
         "estimated_total_cost": allocation_result["estimated_total_cost"],
         "fill_rate": allocation_result["fill_rate"],
+        "retrieval_context": retrieval_context,
     }
+
+
+def run_llm_orchestrated_pipeline(
+    *,
+    product_id: str,
+    inbound: int,
+    locations: List[Dict],
+    history: List[Dict],
+    horizon: int = 7,
+) -> Dict:
+    # Backward-compatible alias retained for existing route calls/tests.
+    return run_rag_orchestrated_pipeline(
+        product_id=product_id,
+        inbound=inbound,
+        locations=locations,
+        history=history,
+        horizon=horizon,
+    )
