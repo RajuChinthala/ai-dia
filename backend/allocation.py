@@ -13,6 +13,7 @@ from typing import Dict, List, Tuple
 
 @dataclass
 class AllocationDecision:
+    product_id: str
     location_id: int
     quantity: int
     rationale: str
@@ -62,6 +63,7 @@ def optimize_allocation(
         total_cost += qty * loc.get("shipping_cost", 0.0)
         decisions.append(
             AllocationDecision(
+                product_id=str(product_id),
                 location_id=loc["location_id"],
                 quantity=qty,
                 rationale="Inbound allocation",
@@ -95,6 +97,7 @@ def optimize_allocation(
             total_cost += cost
             decisions.append(
                 AllocationDecision(
+                    product_id=str(product_id),
                     location_id=loc["location_id"],
                     quantity=transfer,
                     rationale=f"Rebalance from {donor['location_id']}",
@@ -103,6 +106,7 @@ def optimize_allocation(
             )
             decisions.append(
                 AllocationDecision(
+                    product_id=str(product_id),
                     location_id=donor["location_id"],
                     quantity=-transfer,
                     rationale=f"Send to {loc['location_id']}",

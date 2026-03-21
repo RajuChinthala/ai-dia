@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ForecastGrid from "../components/ForecastGrid.jsx";
 import AllocationTable from "../components/AllocationTable.jsx";
 import LocationsPanel from "../components/LocationsPanel.jsx";
@@ -16,14 +16,21 @@ export default function AgentPage({
   runAgentPipeline,
   agentLoading,
   agentMessage,
+  loadLocationsFromBigCommerce,
+  bigCommerceLoading,
+  bigCommerceMessage,
   forecasts,
   plan,
 }) {
+  const [productIdsCsv, setProductIdsCsv] = useState("");
+  const [locationIdsCsv, setLocationIdsCsv] = useState("");
+  const [useSimulation, setUseSimulation] = useState(true);
+
   return (
     <div className="page">
       <PageHeader
         title={PAGE_TEXT.agent.title}
-        subtitle={`Product ${productId}. ${PAGE_TEXT.agent.subtitle}`}
+        subtitle={`${productId ? `Product ${productId}.` : "No product selected."} ${PAGE_TEXT.agent.subtitle}`}
         summary={summary}
         inbound={inbound}
       />
@@ -38,10 +45,49 @@ export default function AgentPage({
             setInbound={setInbound}
             updateLocation={updateLocation}
           />
+          <div style={{ marginTop: 8, display: "grid", gap: 8 }}>
+            <input
+              className="input"
+              value={productIdsCsv}
+              onChange={(e) => setProductIdsCsv(e.target.value)}
+              placeholder="Product IDs (csv, optional): 101,102,103"
+            />
+            <input
+              className="input"
+              value={locationIdsCsv}
+              onChange={(e) => setLocationIdsCsv(e.target.value)}
+              placeholder="Location IDs (csv, optional): 1001,1002"
+            />
+            <label style={{ color: "#cbd5e1", fontSize: 13, display: "flex", gap: 8, alignItems: "center" }}>
+              <input
+                type="checkbox"
+                checked={useSimulation}
+                onChange={(e) => setUseSimulation(e.target.checked)}
+              />
+              Use simulated multi-location data
+            </label>
+          </div>
+          <button
+            onClick={() =>
+              loadLocationsFromBigCommerce({
+                productIdsCsv,
+                locationIdsCsv,
+                useSimulation,
+              })
+            }
+            className="button-primary"
+            disabled={bigCommerceLoading}
+            style={{ marginTop: 8 }}
+          >
+            {bigCommerceLoading ? "Loading BigCommerce data..." : "Load Locations from BigCommerce"}
+          </button>
           <button onClick={runAgentPipeline} className="button-primary" disabled={agentLoading}>
             {agentLoading ? "Running pipeline..." : "Run Agent Pipeline"}
           </button>
           {agentMessage && <div style={{ color: "#cbd5e1", marginTop: 8 }}>{agentMessage}</div>}
+          {bigCommerceMessage && (
+            <div style={{ color: "#cbd5e1", marginTop: 8 }}>{bigCommerceMessage}</div>
+          )}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <div className="panel">

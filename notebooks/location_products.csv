@@ -1,0 +1,114 @@
+product_id,variant_id,sku,product_name,location_id,location_name,inventory_level,availability,capacity,safety_stock,shipping_cost,service_level
+113,77,e7b45a330bda5e444b30ddb287268bcb,Premium Fancy Attar Variety Pack (32ml),1,Default location,16,available,500,50,3.0,0.9
+114,78,9c1b658add4d39f285c550e8e8ca66ac,Kose Cosmeport Softymo Collagen Cleansing Wash (190g),1,Default location,79,available,500,50,3.0,0.9
+115,79,2c35be31d9c7db5109a349b47ed9c4ea,Pink Plums Facial Care Combo Kit (Pack of 4),1,Default location,186,available,500,50,3.0,0.9
+116,80,02e286114784527d082107ccc1dbe44d,Royal Beauty Pearl Powder Body Cream (100ml),1,Default location,118,available,500,50,3.0,0.9
+117,81,ddc52c8203532d90283281e364d9462e,Flavourlite Dried Seedless Apricots (250g),1,Default location,92,available,500,50,3.0,0.9
+117,82,bread-005-SM,Flavourlite Dried Seedless Apricots (250g),1,Default location,20,available,500,50,3.0,0.9
+117,83,bread-005-ME,Flavourlite Dried Seedless Apricots (250g),1,Default location,10,low_stock,500,50,3.0,0.9
+117,84,bread-005-LA,Flavourlite Dried Seedless Apricots (250g),1,Default location,10,low_stock,500,50,3.0,0.9
+118,85,70e9325110e976b741ddaa5149135773,Green Shirt,1,Default location,205,available,500,50,3.0,0.9
+119,86,79ce318d3925e81a0d347536337053b7,Blue Shirt,1,Default location,237,available,500,50,3.0,0.9
+120,87,72fbfe7ca929dd73a31b42407f12f819,Leather Dress Shoes,1,Default location,67,available,500,50,3.0,0.9
+121,88,3368bd9e247aa5b5e813d8c4ca6983cd,Adidas Adizero running shoe,1,Default location,184,available,500,50,3.0,0.9
+122,89,40bd5c6d8122f88329bd38d8cf05a023,Mercedes-Benz Man Eau de Toilette for Men (100 ml),1,Default location,108,available,500,50,3.0,0.9
+123,90,2b487202ef4f93792e35b02c50a2e120,Adidas Ice Dive Eau de Toilette for Men (50 ml),1,Default location,204,available,500,50,3.0,0.9
+124,91,8398da00967e48022047daabee3258f5,Classic Grey Wool Coat,1,Default location,147,available,500,50,3.0,0.9
+125,92,91ca3d8989e7b66146e0e0e9254f8e65,white long-sleeve crewneck sweatshirt,1,Default location,239,available,500,50,3.0,0.9
+126,93,d519ec65458739eee73409ead133ae7f,Converse Chuck Taylor All-Stars,1,Default location,131,available,500,50,3.0,0.9
+127,94,9b16079eb7b0bfb82b2d6a10d3a808f4,Birkenstock Arizona Sandals,1,Default location,216,available,500,50,3.0,0.9
+128,95,a95f69799dd96e36b637278bac190430,Christian Louboutin So Kate Pumps,1,Default location,226,available,500,50,3.0,0.9
+129,96,b6660a8d807823859ab2da6f1bf3c036,Dr. Martens 1460 Combat Boots,1,Default location,50,available,500,50,3.0,0.9
+130,97,p1,Hoka Clifton Running Shoes,1,Default location,0,out_of_stock,500,50,3.0,0.9
+131,98,p3,Acqua di Gio by Giorgio Armani (Eau de Toilette),1,Default location,0,out_of_stock,500,50,3.0,0.9
+132,99,p4,Chanel N°5 (Eau de Parfum),1,Default location,0,out_of_stock,500,50,3.0,0.9
+133,100,p5,Tom Ford Tobacco Vanille (Eau de Parfum),1,Default location,0,out_of_stock,500,50,3.0,0.9
+134,101,p6,Jo Malone London Wood Sage & Sea Salt (Cologne),1,Default location,0,out_of_stock,500,50,3.0,0.9
+135,102,p7,Oud for Greatness by Initio Parfums Prives (Extrait de Parfum),1,Default location,0,out_of_stock,500,50,3.0,0.9
+136,103,p8,Supreme Box Logo Hoodie,1,Default location,0,out_of_stock,500,50,3.0,0.9
+137,104,p9,Burberry Trench Coat,1,Default location,0,out_of_stock,500,50,3.0,0.9
+138,105,p10,Levi's 501 Original Fit Jeans,1,Default location,0,out_of_stock,500,50,3.0,0.9
+139,106,p11,Lululemon Align High-Rise Pant,1,Default location,0,out_of_stock,500,50,3.0,0.9
+140,107,p12,A Classic Black Tuxedo,1,Default location,0,out_of_stock,500,50,3.0,0.9
+141,108,p13,Customizable Performance V-Neck Uniform Kit,1,Default location,0,out_of_stock,500,50,3.0,0.9
+142,109,p14,logo-waistband cropped leggings,1,Default location,11,available,500,50,3.0,0.9
+195,162,19204766,Brushed Finish Oversize Jumper,1,Default location,71,available,500,50,3.0,0.9
+196,163,17752697,Logo Print Cotton Top,1,Default location,78,available,500,50,3.0,0.9
+197,164,19241483,Aurella Drawstring Trousers,1,Default location,237,available,500,50,3.0,0.9
+198,165,17600898,Logo Print Oversized Hoodie,1,Default location,87,available,500,50,3.0,0.9
+199,166,19302989,Logo Print T-Shirt,1,Default location,201,available,500,50,3.0,0.9
+200,167,17716887,Camouflage Pattern Jumper,1,Default location,198,available,500,50,3.0,0.9
+201,168,18532355,Bling Embellished Single Breasted Blazer,1,Default location,23,available,500,50,3.0,0.9
+202,169,17566071,Crystal Embellished Cropped Top,1,Default location,45,available,500,50,3.0,0.9
+203,170,17655109,Plaid Patterned Asymmetric Blouse,1,Default location,144,available,500,50,3.0,0.9
+204,171,19822620,Fringe Detail Blanket,1,Default location,110,available,500,50,3.0,0.9
+205,172,13633042,Panelled Logo Print Jacket,1,Default location,248,available,500,50,3.0,0.9
+206,173,17185924,Distressed Rib Knit Sweatshirt,1,Default location,106,available,500,50,3.0,0.9
+209,176,19391201,Logo Patch Straight Leg Trousers,1,Default location,185,available,500,50,3.0,0.9
+210,177,19414484,Cropped Slim Fit Chinos,1,Default location,100,available,500,50,3.0,0.9
+212,179,14261624,Parati Printed Trunks,1,Default location,24,available,500,50,3.0,0.9
+213,180,18864551,V-10 Low Top Sneakers,1,Default location,21,available,500,50,3.0,0.9
+214,181,18833242,2006 Star Print T-Shirt,1,Default location,30,available,500,50,3.0,0.9
+216,183,19646155,Camouflage Print Cotton Shirt,1,Default location,59,available,500,50,3.0,0.9
+217,184,17470384,Juanita One Shoulder Swimsuit,1,Default location,33,available,500,50,3.0,0.9
+218,185,19029711,Floral Print Midi Dress,1,Default location,207,available,500,50,3.0,0.9
+220,187,20370195,Metallic Plisse Gown,1,Default location,127,available,500,50,3.0,0.9
+221,188,20330027,Pre-Owned Ingenieur,1,Default location,196,available,500,50,3.0,0.9
+222,189,19452881,2020 Pre-Owned Royal Oak Automatik (41mm),1,Default location,177,available,500,50,3.0,0.9
+223,190,14730110,Jarron Galium Geometric Pattern Vase,1,Default location,196,available,500,50,3.0,0.9
+225,192,19298753,Logo Print Cotton T-Shirt,1,Default location,42,available,500,50,3.0,0.9
+227,194,18004408,Narrow Brim Straw Hat,1,Default location,98,available,500,50,3.0,0.9
+228,195,19021212,Graphic Print Hi Top Sneakers,1,Default location,2,low_stock,500,50,3.0,0.9
+229,196,20484111,Pegasus Turbo Next Nature Sneakers,1,Default location,223,available,500,50,3.0,0.9
+230,197,20240325,Tie Detail Leather Midi Skirt,1,Default location,118,available,500,50,3.0,0.9
+232,199,19514072,Logo Print Shorts,1,Default location,64,available,500,50,3.0,0.9
+233,200,19274565,Logo Print Long Sleeve Sweatshirt,1,Default location,23,available,500,50,3.0,0.9
+234,201,19813401,Embroidered Silk Shirt,1,Default location,214,available,500,50,3.0,0.9
+235,202,14169637,Lebron 16 Four Horsemen Sneakers,1,Default location,7,low_stock,500,50,3.0,0.9
+236,203,20060068,Elasticated Waist Track Pants,1,Default location,78,available,500,50,3.0,0.9
+237,204,19349405,Roll Neck Lame Dress,1,Default location,39,available,500,50,3.0,0.9
+239,206,18892821,Checked Long Sleeved Shirt,1,Default location,131,available,500,50,3.0,0.9
+241,208,18455056,Thomas Bear Twi Tone Sweatshirt,1,Default location,63,available,500,50,3.0,0.9
+242,209,19255014,Pullover Classic Hoodie,1,Default location,37,available,500,50,3.0,0.9
+243,210,19123075,Oversized Faux Fur Gilet,1,Default location,126,available,500,50,3.0,0.9
+244,211,15911934,Round Neck Jumper,1,Default location,121,available,500,50,3.0,0.9
+246,213,17751985,Kardes Feather Print Mini Dress,1,Default location,89,available,500,50,3.0,0.9
+247,214,16982752,Teddy Patch Hoodie Tracksuit Set,1,Default location,200,available,500,50,3.0,0.9
+248,215,18814197,Checked Wide Leg Trousers,1,Default location,50,available,500,50,3.0,0.9
+249,216,19092151,Logo Print Track Pants,1,Default location,152,available,500,50,3.0,0.9
+250,217,18650368,Logo Mania Reversible Dress,1,Default location,4,low_stock,500,50,3.0,0.9
+251,218,14486009,Sensitive Content Hoodie,1,Default location,19,available,500,50,3.0,0.9
+252,219,20068659,Tenesy Cotton Tank Top,1,Default location,56,available,500,50,3.0,0.9
+253,220,19748412,Abstract Print Long Sleeve Blouse,1,Default location,234,available,500,50,3.0,0.9
+314,281,AFN-9PM-EDP,Afnan 9PM Eau de Parfum,1,Default location,120,available,500,50,3.0,0.9
+315,282,CH-BDC-EDP,Bleu de Chanel,1,Default location,90,available,500,50,3.0,0.9
+316,283,NAU-VYG-EDT,Nautica Voyage Eau de Toilette,1,Default location,500,available,500,50,3.0,0.9
+317,284,TF-TV-EDP,Tom Ford Tobacco Vanille,1,Default location,50,available,500,50,3.0,0.9
+318,285,VER-EROS-EDT,Versace Eros Eau de Toilette,1,Default location,150,available,500,50,3.0,0.9
+319,286,JM-WSSS-COL,Jo Malone Wood Sage & Sea Salt,1,Default location,80,available,500,50,3.0,0.9
+320,287,GA-SI-EDP,Giorgio Armani Si,1,Default location,140,available,500,50,3.0,0.9
+321,288,CD-SVG-EDT,Dior Sauvage Eau de Toilette,1,Default location,200,available,500,50,3.0,0.9
+322,289,ARF-CDNIM-EDT,Club de Nuit Intense Man,1,Default location,300,available,500,50,3.0,0.9
+323,290,LAN-LVEB-EDP,Lancôme La Vie Est Belle,1,Default location,160,available,500,50,3.0,0.9
+324,291,DVD-CW-EDT,Davidoff Cool Water,1,Default location,180,available,500,50,3.0,0.9
+325,292,CK-ONE-EDT,Calvin Klein CK One,1,Default location,250,available,500,50,3.0,0.9
+326,293,CH-GG-EDP,Carolina Herrera Good Girl,1,Default location,100,available,500,50,3.0,0.9
+327,294,PR-1M-EDT,Paco Rabanne 1 Million,1,Default location,180,available,500,50,3.0,0.9
+328,295,MB-EXP-EDP,Montblanc Explorer,1,Default location,140,available,500,50,3.0,0.9
+329,296,GA-ADG-EDT,Acqua Di Giò Eau de Toilette,1,Default location,150,available,500,50,3.0,0.9
+330,297,HLW-MNX-EDT,Halloween Man X,1,Default location,110,available,500,50,3.0,0.9
+331,298,JPG-LM-EDT,Jean Paul Gaultier Le Male,1,Default location,150,available,500,50,3.0,0.9
+332,299,GSS-SED-EDT,Guess Seductive Homme,1,Default location,200,available,500,50,3.0,0.9
+333,300,YSL-LIB-EDP,Yves Saint Laurent Libre,1,Default location,115,available,500,50,3.0,0.9
+334,301,BUR-TCH-EDT,Burberry Touch for Men,1,Default location,125,available,500,50,3.0,0.9
+335,302,DG-LB-EDT,Dolce & Gabbana Light Blue,1,Default location,200,available,500,50,3.0,0.9
+336,303,GU-BLM-EDP,Gucci Bloom Eau de Parfum,1,Default location,75,available,500,50,3.0,0.9
+337,304,HB-BOT-EDT,Hugo Boss Bottled,1,Default location,160,available,500,50,3.0,0.9
+338,305,VR-FB-EDP,Viktor&Rolf Flowerbomb,1,Default location,110,available,500,50,3.0,0.9
+339,306,LAC-WHT-EDT,Lacoste Blanc,1,Default location,140,available,500,50,3.0,0.9
+340,307,AG-CLD-EDP,Ariana Grande Cloud,1,Default location,179,available,500,50,3.0,0.9
+341,308,AZ-WNT-EDT,Azzaro Wanted,1,Default location,130,available,500,50,3.0,0.9
+342,309,VER-BC-EDT,Versace Bright Crystal,1,Default location,128,available,500,50,3.0,0.9
+343,310,CH-N5-EDP,Chanel N°5 Eau de Parfum,1,Default location,100,available,500,50,3.0,0.9
+344,311,18165932,logo-print pullover hoodie,1,Default location,185,available,500,50,3.0,0.9
+345,312,19629146,graphic logo-print T-shirt,1,Default location,45,available,500,50,3.0,0.9

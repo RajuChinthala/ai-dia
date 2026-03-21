@@ -1,0 +1,453 @@
+product_id,variant_id,sku,product_name,location_id,location_name,inventory_level,availability,capacity,safety_stock,shipping_cost,service_level
+113,77,e7b45a330bda5e444b30ddb287268bcb,Premium Fancy Attar Variety Pack (32ml),1,Default location,7,low_stock,500,50,3.0,0.9
+113,77,e7b45a330bda5e444b30ddb287268bcb,Premium Fancy Attar Variety Pack (32ml),1001,Bengaluru Hub,4,low_stock,500,50,2.8,0.95
+113,77,e7b45a330bda5e444b30ddb287268bcb,Premium Fancy Attar Variety Pack (32ml),1002,Mumbai Store,3,low_stock,500,50,3.6,0.92
+113,77,e7b45a330bda5e444b30ddb287268bcb,Premium Fancy Attar Variety Pack (32ml),1003,Delhi Store,2,low_stock,500,50,3.2,0.94
+114,78,9c1b658add4d39f285c550e8e8ca66ac,Kose Cosmeport Softymo Collagen Cleansing Wash (190g),1,Default location,32,available,500,50,3.0,0.9
+114,78,9c1b658add4d39f285c550e8e8ca66ac,Kose Cosmeport Softymo Collagen Cleansing Wash (190g),1001,Bengaluru Hub,20,available,500,50,2.8,0.95
+114,78,9c1b658add4d39f285c550e8e8ca66ac,Kose Cosmeport Softymo Collagen Cleansing Wash (190g),1002,Mumbai Store,16,available,500,50,3.6,0.92
+114,78,9c1b658add4d39f285c550e8e8ca66ac,Kose Cosmeport Softymo Collagen Cleansing Wash (190g),1003,Delhi Store,11,available,500,50,3.2,0.94
+115,79,2c35be31d9c7db5109a349b47ed9c4ea,Pink Plums Facial Care Combo Kit (Pack of 4),1,Default location,75,available,500,50,3.0,0.9
+115,79,2c35be31d9c7db5109a349b47ed9c4ea,Pink Plums Facial Care Combo Kit (Pack of 4),1001,Bengaluru Hub,47,available,500,50,2.8,0.95
+115,79,2c35be31d9c7db5109a349b47ed9c4ea,Pink Plums Facial Care Combo Kit (Pack of 4),1002,Mumbai Store,37,available,500,50,3.6,0.92
+115,79,2c35be31d9c7db5109a349b47ed9c4ea,Pink Plums Facial Care Combo Kit (Pack of 4),1003,Delhi Store,27,available,500,50,3.2,0.94
+116,80,02e286114784527d082107ccc1dbe44d,Royal Beauty Pearl Powder Body Cream (100ml),1,Default location,48,available,500,50,3.0,0.9
+116,80,02e286114784527d082107ccc1dbe44d,Royal Beauty Pearl Powder Body Cream (100ml),1001,Bengaluru Hub,30,available,500,50,2.8,0.95
+116,80,02e286114784527d082107ccc1dbe44d,Royal Beauty Pearl Powder Body Cream (100ml),1002,Mumbai Store,23,available,500,50,3.6,0.92
+116,80,02e286114784527d082107ccc1dbe44d,Royal Beauty Pearl Powder Body Cream (100ml),1003,Delhi Store,17,available,500,50,3.2,0.94
+117,81,ddc52c8203532d90283281e364d9462e,Flavourlite Dried Seedless Apricots (250g),1,Default location,37,available,500,50,3.0,0.9
+117,81,ddc52c8203532d90283281e364d9462e,Flavourlite Dried Seedless Apricots (250g),1001,Bengaluru Hub,24,available,500,50,2.8,0.95
+117,81,ddc52c8203532d90283281e364d9462e,Flavourlite Dried Seedless Apricots (250g),1002,Mumbai Store,18,available,500,50,3.6,0.92
+117,81,ddc52c8203532d90283281e364d9462e,Flavourlite Dried Seedless Apricots (250g),1003,Delhi Store,13,available,500,50,3.2,0.94
+117,82,bread-005-SM,Flavourlite Dried Seedless Apricots (250g),1,Default location,8,low_stock,500,50,3.0,0.9
+117,82,bread-005-SM,Flavourlite Dried Seedless Apricots (250g),1001,Bengaluru Hub,5,low_stock,500,50,2.8,0.95
+117,82,bread-005-SM,Flavourlite Dried Seedless Apricots (250g),1002,Mumbai Store,4,low_stock,500,50,3.6,0.92
+117,82,bread-005-SM,Flavourlite Dried Seedless Apricots (250g),1003,Delhi Store,3,low_stock,500,50,3.2,0.94
+117,83,bread-005-ME,Flavourlite Dried Seedless Apricots (250g),1,Default location,5,low_stock,500,50,3.0,0.9
+117,83,bread-005-ME,Flavourlite Dried Seedless Apricots (250g),1001,Bengaluru Hub,2,low_stock,500,50,2.8,0.95
+117,83,bread-005-ME,Flavourlite Dried Seedless Apricots (250g),1002,Mumbai Store,2,low_stock,500,50,3.6,0.92
+117,83,bread-005-ME,Flavourlite Dried Seedless Apricots (250g),1003,Delhi Store,1,low_stock,500,50,3.2,0.94
+117,84,bread-005-LA,Flavourlite Dried Seedless Apricots (250g),1,Default location,5,low_stock,500,50,3.0,0.9
+117,84,bread-005-LA,Flavourlite Dried Seedless Apricots (250g),1001,Bengaluru Hub,2,low_stock,500,50,2.8,0.95
+117,84,bread-005-LA,Flavourlite Dried Seedless Apricots (250g),1002,Mumbai Store,2,low_stock,500,50,3.6,0.92
+117,84,bread-005-LA,Flavourlite Dried Seedless Apricots (250g),1003,Delhi Store,1,low_stock,500,50,3.2,0.94
+118,85,70e9325110e976b741ddaa5149135773,Green Shirt,1,Default location,83,available,500,50,3.0,0.9
+118,85,70e9325110e976b741ddaa5149135773,Green Shirt,1001,Bengaluru Hub,51,available,500,50,2.8,0.95
+118,85,70e9325110e976b741ddaa5149135773,Green Shirt,1002,Mumbai Store,41,available,500,50,3.6,0.92
+118,85,70e9325110e976b741ddaa5149135773,Green Shirt,1003,Delhi Store,30,available,500,50,3.2,0.94
+119,86,79ce318d3925e81a0d347536337053b7,Blue Shirt,1,Default location,95,available,500,50,3.0,0.9
+119,86,79ce318d3925e81a0d347536337053b7,Blue Shirt,1001,Bengaluru Hub,60,available,500,50,2.8,0.95
+119,86,79ce318d3925e81a0d347536337053b7,Blue Shirt,1002,Mumbai Store,47,available,500,50,3.6,0.92
+119,86,79ce318d3925e81a0d347536337053b7,Blue Shirt,1003,Delhi Store,35,available,500,50,3.2,0.94
+120,87,72fbfe7ca929dd73a31b42407f12f819,Leather Dress Shoes,1,Default location,27,available,500,50,3.0,0.9
+120,87,72fbfe7ca929dd73a31b42407f12f819,Leather Dress Shoes,1001,Bengaluru Hub,17,available,500,50,2.8,0.95
+120,87,72fbfe7ca929dd73a31b42407f12f819,Leather Dress Shoes,1002,Mumbai Store,13,available,500,50,3.6,0.92
+120,87,72fbfe7ca929dd73a31b42407f12f819,Leather Dress Shoes,1003,Delhi Store,10,low_stock,500,50,3.2,0.94
+121,88,3368bd9e247aa5b5e813d8c4ca6983cd,Adidas Adizero running shoe,1,Default location,74,available,500,50,3.0,0.9
+121,88,3368bd9e247aa5b5e813d8c4ca6983cd,Adidas Adizero running shoe,1001,Bengaluru Hub,47,available,500,50,2.8,0.95
+121,88,3368bd9e247aa5b5e813d8c4ca6983cd,Adidas Adizero running shoe,1002,Mumbai Store,36,available,500,50,3.6,0.92
+121,88,3368bd9e247aa5b5e813d8c4ca6983cd,Adidas Adizero running shoe,1003,Delhi Store,27,available,500,50,3.2,0.94
+122,89,40bd5c6d8122f88329bd38d8cf05a023,Mercedes-Benz Man Eau de Toilette for Men (100 ml),1,Default location,44,available,500,50,3.0,0.9
+122,89,40bd5c6d8122f88329bd38d8cf05a023,Mercedes-Benz Man Eau de Toilette for Men (100 ml),1001,Bengaluru Hub,27,available,500,50,2.8,0.95
+122,89,40bd5c6d8122f88329bd38d8cf05a023,Mercedes-Benz Man Eau de Toilette for Men (100 ml),1002,Mumbai Store,21,available,500,50,3.6,0.92
+122,89,40bd5c6d8122f88329bd38d8cf05a023,Mercedes-Benz Man Eau de Toilette for Men (100 ml),1003,Delhi Store,16,available,500,50,3.2,0.94
+123,90,2b487202ef4f93792e35b02c50a2e120,Adidas Ice Dive Eau de Toilette for Men (50 ml),1,Default location,82,available,500,50,3.0,0.9
+123,90,2b487202ef4f93792e35b02c50a2e120,Adidas Ice Dive Eau de Toilette for Men (50 ml),1001,Bengaluru Hub,52,available,500,50,2.8,0.95
+123,90,2b487202ef4f93792e35b02c50a2e120,Adidas Ice Dive Eau de Toilette for Men (50 ml),1002,Mumbai Store,40,available,500,50,3.6,0.92
+123,90,2b487202ef4f93792e35b02c50a2e120,Adidas Ice Dive Eau de Toilette for Men (50 ml),1003,Delhi Store,30,available,500,50,3.2,0.94
+124,91,8398da00967e48022047daabee3258f5,Classic Grey Wool Coat,1,Default location,59,available,500,50,3.0,0.9
+124,91,8398da00967e48022047daabee3258f5,Classic Grey Wool Coat,1001,Bengaluru Hub,37,available,500,50,2.8,0.95
+124,91,8398da00967e48022047daabee3258f5,Classic Grey Wool Coat,1002,Mumbai Store,29,available,500,50,3.6,0.92
+124,91,8398da00967e48022047daabee3258f5,Classic Grey Wool Coat,1003,Delhi Store,22,available,500,50,3.2,0.94
+125,92,91ca3d8989e7b66146e0e0e9254f8e65,white long-sleeve crewneck sweatshirt,1,Default location,96,available,500,50,3.0,0.9
+125,92,91ca3d8989e7b66146e0e0e9254f8e65,white long-sleeve crewneck sweatshirt,1001,Bengaluru Hub,60,available,500,50,2.8,0.95
+125,92,91ca3d8989e7b66146e0e0e9254f8e65,white long-sleeve crewneck sweatshirt,1002,Mumbai Store,48,available,500,50,3.6,0.92
+125,92,91ca3d8989e7b66146e0e0e9254f8e65,white long-sleeve crewneck sweatshirt,1003,Delhi Store,35,available,500,50,3.2,0.94
+126,93,d519ec65458739eee73409ead133ae7f,Converse Chuck Taylor All-Stars,1,Default location,53,available,500,50,3.0,0.9
+126,93,d519ec65458739eee73409ead133ae7f,Converse Chuck Taylor All-Stars,1001,Bengaluru Hub,33,available,500,50,2.8,0.95
+126,93,d519ec65458739eee73409ead133ae7f,Converse Chuck Taylor All-Stars,1002,Mumbai Store,26,available,500,50,3.6,0.92
+126,93,d519ec65458739eee73409ead133ae7f,Converse Chuck Taylor All-Stars,1003,Delhi Store,19,available,500,50,3.2,0.94
+127,94,9b16079eb7b0bfb82b2d6a10d3a808f4,Birkenstock Arizona Sandals,1,Default location,87,available,500,50,3.0,0.9
+127,94,9b16079eb7b0bfb82b2d6a10d3a808f4,Birkenstock Arizona Sandals,1001,Bengaluru Hub,54,available,500,50,2.8,0.95
+127,94,9b16079eb7b0bfb82b2d6a10d3a808f4,Birkenstock Arizona Sandals,1002,Mumbai Store,43,available,500,50,3.6,0.92
+127,94,9b16079eb7b0bfb82b2d6a10d3a808f4,Birkenstock Arizona Sandals,1003,Delhi Store,32,available,500,50,3.2,0.94
+128,95,a95f69799dd96e36b637278bac190430,Christian Louboutin So Kate Pumps,1,Default location,91,available,500,50,3.0,0.9
+128,95,a95f69799dd96e36b637278bac190430,Christian Louboutin So Kate Pumps,1001,Bengaluru Hub,57,available,500,50,2.8,0.95
+128,95,a95f69799dd96e36b637278bac190430,Christian Louboutin So Kate Pumps,1002,Mumbai Store,45,available,500,50,3.6,0.92
+128,95,a95f69799dd96e36b637278bac190430,Christian Louboutin So Kate Pumps,1003,Delhi Store,33,available,500,50,3.2,0.94
+129,96,b6660a8d807823859ab2da6f1bf3c036,Dr. Martens 1460 Combat Boots,1,Default location,21,available,500,50,3.0,0.9
+129,96,b6660a8d807823859ab2da6f1bf3c036,Dr. Martens 1460 Combat Boots,1001,Bengaluru Hub,12,available,500,50,2.8,0.95
+129,96,b6660a8d807823859ab2da6f1bf3c036,Dr. Martens 1460 Combat Boots,1002,Mumbai Store,10,low_stock,500,50,3.6,0.92
+129,96,b6660a8d807823859ab2da6f1bf3c036,Dr. Martens 1460 Combat Boots,1003,Delhi Store,7,low_stock,500,50,3.2,0.94
+130,97,p1,Hoka Clifton Running Shoes,1,Default location,0,out_of_stock,500,50,3.0,0.9
+130,97,p1,Hoka Clifton Running Shoes,1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+130,97,p1,Hoka Clifton Running Shoes,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+130,97,p1,Hoka Clifton Running Shoes,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+131,98,p3,Acqua di Gio by Giorgio Armani (Eau de Toilette),1,Default location,0,out_of_stock,500,50,3.0,0.9
+131,98,p3,Acqua di Gio by Giorgio Armani (Eau de Toilette),1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+131,98,p3,Acqua di Gio by Giorgio Armani (Eau de Toilette),1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+131,98,p3,Acqua di Gio by Giorgio Armani (Eau de Toilette),1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+132,99,p4,Chanel N°5 (Eau de Parfum),1,Default location,0,out_of_stock,500,50,3.0,0.9
+132,99,p4,Chanel N°5 (Eau de Parfum),1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+132,99,p4,Chanel N°5 (Eau de Parfum),1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+132,99,p4,Chanel N°5 (Eau de Parfum),1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+133,100,p5,Tom Ford Tobacco Vanille (Eau de Parfum),1,Default location,0,out_of_stock,500,50,3.0,0.9
+133,100,p5,Tom Ford Tobacco Vanille (Eau de Parfum),1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+133,100,p5,Tom Ford Tobacco Vanille (Eau de Parfum),1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+133,100,p5,Tom Ford Tobacco Vanille (Eau de Parfum),1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+134,101,p6,Jo Malone London Wood Sage & Sea Salt (Cologne),1,Default location,0,out_of_stock,500,50,3.0,0.9
+134,101,p6,Jo Malone London Wood Sage & Sea Salt (Cologne),1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+134,101,p6,Jo Malone London Wood Sage & Sea Salt (Cologne),1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+134,101,p6,Jo Malone London Wood Sage & Sea Salt (Cologne),1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+135,102,p7,Oud for Greatness by Initio Parfums Prives (Extrait de Parfum),1,Default location,0,out_of_stock,500,50,3.0,0.9
+135,102,p7,Oud for Greatness by Initio Parfums Prives (Extrait de Parfum),1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+135,102,p7,Oud for Greatness by Initio Parfums Prives (Extrait de Parfum),1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+135,102,p7,Oud for Greatness by Initio Parfums Prives (Extrait de Parfum),1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+136,103,p8,Supreme Box Logo Hoodie,1,Default location,0,out_of_stock,500,50,3.0,0.9
+136,103,p8,Supreme Box Logo Hoodie,1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+136,103,p8,Supreme Box Logo Hoodie,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+136,103,p8,Supreme Box Logo Hoodie,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+137,104,p9,Burberry Trench Coat,1,Default location,0,out_of_stock,500,50,3.0,0.9
+137,104,p9,Burberry Trench Coat,1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+137,104,p9,Burberry Trench Coat,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+137,104,p9,Burberry Trench Coat,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+138,105,p10,Levi's 501 Original Fit Jeans,1,Default location,0,out_of_stock,500,50,3.0,0.9
+138,105,p10,Levi's 501 Original Fit Jeans,1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+138,105,p10,Levi's 501 Original Fit Jeans,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+138,105,p10,Levi's 501 Original Fit Jeans,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+139,106,p11,Lululemon Align High-Rise Pant,1,Default location,0,out_of_stock,500,50,3.0,0.9
+139,106,p11,Lululemon Align High-Rise Pant,1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+139,106,p11,Lululemon Align High-Rise Pant,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+139,106,p11,Lululemon Align High-Rise Pant,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+140,107,p12,A Classic Black Tuxedo,1,Default location,0,out_of_stock,500,50,3.0,0.9
+140,107,p12,A Classic Black Tuxedo,1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+140,107,p12,A Classic Black Tuxedo,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+140,107,p12,A Classic Black Tuxedo,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+141,108,p13,Customizable Performance V-Neck Uniform Kit,1,Default location,0,out_of_stock,500,50,3.0,0.9
+141,108,p13,Customizable Performance V-Neck Uniform Kit,1001,Bengaluru Hub,0,out_of_stock,500,50,2.8,0.95
+141,108,p13,Customizable Performance V-Neck Uniform Kit,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+141,108,p13,Customizable Performance V-Neck Uniform Kit,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+142,109,p14,logo-waistband cropped leggings,1,Default location,5,low_stock,500,50,3.0,0.9
+142,109,p14,logo-waistband cropped leggings,1001,Bengaluru Hub,3,low_stock,500,50,2.8,0.95
+142,109,p14,logo-waistband cropped leggings,1002,Mumbai Store,2,low_stock,500,50,3.6,0.92
+142,109,p14,logo-waistband cropped leggings,1003,Delhi Store,1,low_stock,500,50,3.2,0.94
+195,162,19204766,Brushed Finish Oversize Jumper,1,Default location,29,available,500,50,3.0,0.9
+195,162,19204766,Brushed Finish Oversize Jumper,1001,Bengaluru Hub,18,available,500,50,2.8,0.95
+195,162,19204766,Brushed Finish Oversize Jumper,1002,Mumbai Store,14,available,500,50,3.6,0.92
+195,162,19204766,Brushed Finish Oversize Jumper,1003,Delhi Store,10,low_stock,500,50,3.2,0.94
+196,163,17752697,Logo Print Cotton Top,1,Default location,32,available,500,50,3.0,0.9
+196,163,17752697,Logo Print Cotton Top,1001,Bengaluru Hub,20,available,500,50,2.8,0.95
+196,163,17752697,Logo Print Cotton Top,1002,Mumbai Store,15,available,500,50,3.6,0.92
+196,163,17752697,Logo Print Cotton Top,1003,Delhi Store,11,available,500,50,3.2,0.94
+197,164,19241483,Aurella Drawstring Trousers,1,Default location,95,available,500,50,3.0,0.9
+197,164,19241483,Aurella Drawstring Trousers,1001,Bengaluru Hub,60,available,500,50,2.8,0.95
+197,164,19241483,Aurella Drawstring Trousers,1002,Mumbai Store,47,available,500,50,3.6,0.92
+197,164,19241483,Aurella Drawstring Trousers,1003,Delhi Store,35,available,500,50,3.2,0.94
+198,165,17600898,Logo Print Oversized Hoodie,1,Default location,35,available,500,50,3.0,0.9
+198,165,17600898,Logo Print Oversized Hoodie,1001,Bengaluru Hub,22,available,500,50,2.8,0.95
+198,165,17600898,Logo Print Oversized Hoodie,1002,Mumbai Store,17,available,500,50,3.6,0.92
+198,165,17600898,Logo Print Oversized Hoodie,1003,Delhi Store,13,available,500,50,3.2,0.94
+199,166,19302989,Logo Print T-Shirt,1,Default location,81,available,500,50,3.0,0.9
+199,166,19302989,Logo Print T-Shirt,1001,Bengaluru Hub,50,available,500,50,2.8,0.95
+199,166,19302989,Logo Print T-Shirt,1002,Mumbai Store,40,available,500,50,3.6,0.92
+199,166,19302989,Logo Print T-Shirt,1003,Delhi Store,30,available,500,50,3.2,0.94
+200,167,17716887,Camouflage Pattern Jumper,1,Default location,80,available,500,50,3.0,0.9
+200,167,17716887,Camouflage Pattern Jumper,1001,Bengaluru Hub,50,available,500,50,2.8,0.95
+200,167,17716887,Camouflage Pattern Jumper,1002,Mumbai Store,39,available,500,50,3.6,0.92
+200,167,17716887,Camouflage Pattern Jumper,1003,Delhi Store,29,available,500,50,3.2,0.94
+201,168,18532355,Bling Embellished Single Breasted Blazer,1,Default location,10,low_stock,500,50,3.0,0.9
+201,168,18532355,Bling Embellished Single Breasted Blazer,1001,Bengaluru Hub,6,low_stock,500,50,2.8,0.95
+201,168,18532355,Bling Embellished Single Breasted Blazer,1002,Mumbai Store,4,low_stock,500,50,3.6,0.92
+201,168,18532355,Bling Embellished Single Breasted Blazer,1003,Delhi Store,3,low_stock,500,50,3.2,0.94
+202,169,17566071,Crystal Embellished Cropped Top,1,Default location,19,available,500,50,3.0,0.9
+202,169,17566071,Crystal Embellished Cropped Top,1001,Bengaluru Hub,11,available,500,50,2.8,0.95
+202,169,17566071,Crystal Embellished Cropped Top,1002,Mumbai Store,9,low_stock,500,50,3.6,0.92
+202,169,17566071,Crystal Embellished Cropped Top,1003,Delhi Store,6,low_stock,500,50,3.2,0.94
+203,170,17655109,Plaid Patterned Asymmetric Blouse,1,Default location,58,available,500,50,3.0,0.9
+203,170,17655109,Plaid Patterned Asymmetric Blouse,1001,Bengaluru Hub,37,available,500,50,2.8,0.95
+203,170,17655109,Plaid Patterned Asymmetric Blouse,1002,Mumbai Store,28,available,500,50,3.6,0.92
+203,170,17655109,Plaid Patterned Asymmetric Blouse,1003,Delhi Store,21,available,500,50,3.2,0.94
+204,171,19822620,Fringe Detail Blanket,1,Default location,45,available,500,50,3.0,0.9
+204,171,19822620,Fringe Detail Blanket,1001,Bengaluru Hub,27,available,500,50,2.8,0.95
+204,171,19822620,Fringe Detail Blanket,1002,Mumbai Store,22,available,500,50,3.6,0.92
+204,171,19822620,Fringe Detail Blanket,1003,Delhi Store,16,available,500,50,3.2,0.94
+205,172,13633042,Panelled Logo Print Jacket,1,Default location,100,available,500,50,3.0,0.9
+205,172,13633042,Panelled Logo Print Jacket,1001,Bengaluru Hub,62,available,500,50,2.8,0.95
+205,172,13633042,Panelled Logo Print Jacket,1002,Mumbai Store,49,available,500,50,3.6,0.92
+205,172,13633042,Panelled Logo Print Jacket,1003,Delhi Store,37,available,500,50,3.2,0.94
+206,173,17185924,Distressed Rib Knit Sweatshirt,1,Default location,43,available,500,50,3.0,0.9
+206,173,17185924,Distressed Rib Knit Sweatshirt,1001,Bengaluru Hub,27,available,500,50,2.8,0.95
+206,173,17185924,Distressed Rib Knit Sweatshirt,1002,Mumbai Store,21,available,500,50,3.6,0.92
+206,173,17185924,Distressed Rib Knit Sweatshirt,1003,Delhi Store,15,available,500,50,3.2,0.94
+209,176,19391201,Logo Patch Straight Leg Trousers,1,Default location,75,available,500,50,3.0,0.9
+209,176,19391201,Logo Patch Straight Leg Trousers,1001,Bengaluru Hub,46,available,500,50,2.8,0.95
+209,176,19391201,Logo Patch Straight Leg Trousers,1002,Mumbai Store,37,available,500,50,3.6,0.92
+209,176,19391201,Logo Patch Straight Leg Trousers,1003,Delhi Store,27,available,500,50,3.2,0.94
+210,177,19414484,Cropped Slim Fit Chinos,1,Default location,40,available,500,50,3.0,0.9
+210,177,19414484,Cropped Slim Fit Chinos,1001,Bengaluru Hub,25,available,500,50,2.8,0.95
+210,177,19414484,Cropped Slim Fit Chinos,1002,Mumbai Store,20,available,500,50,3.6,0.92
+210,177,19414484,Cropped Slim Fit Chinos,1003,Delhi Store,15,available,500,50,3.2,0.94
+212,179,14261624,Parati Printed Trunks,1,Default location,10,low_stock,500,50,3.0,0.9
+212,179,14261624,Parati Printed Trunks,1001,Bengaluru Hub,7,low_stock,500,50,2.8,0.95
+212,179,14261624,Parati Printed Trunks,1002,Mumbai Store,4,low_stock,500,50,3.6,0.92
+212,179,14261624,Parati Printed Trunks,1003,Delhi Store,3,low_stock,500,50,3.2,0.94
+213,180,18864551,V-10 Low Top Sneakers,1,Default location,9,low_stock,500,50,3.0,0.9
+213,180,18864551,V-10 Low Top Sneakers,1001,Bengaluru Hub,5,low_stock,500,50,2.8,0.95
+213,180,18864551,V-10 Low Top Sneakers,1002,Mumbai Store,4,low_stock,500,50,3.6,0.92
+213,180,18864551,V-10 Low Top Sneakers,1003,Delhi Store,3,low_stock,500,50,3.2,0.94
+214,181,18833242,2006 Star Print T-Shirt,1,Default location,13,available,500,50,3.0,0.9
+214,181,18833242,2006 Star Print T-Shirt,1001,Bengaluru Hub,7,low_stock,500,50,2.8,0.95
+214,181,18833242,2006 Star Print T-Shirt,1002,Mumbai Store,6,low_stock,500,50,3.6,0.92
+214,181,18833242,2006 Star Print T-Shirt,1003,Delhi Store,4,low_stock,500,50,3.2,0.94
+216,183,19646155,Camouflage Print Cotton Shirt,1,Default location,24,available,500,50,3.0,0.9
+216,183,19646155,Camouflage Print Cotton Shirt,1001,Bengaluru Hub,15,available,500,50,2.8,0.95
+216,183,19646155,Camouflage Print Cotton Shirt,1002,Mumbai Store,12,available,500,50,3.6,0.92
+216,183,19646155,Camouflage Print Cotton Shirt,1003,Delhi Store,8,low_stock,500,50,3.2,0.94
+217,184,17470384,Juanita One Shoulder Swimsuit,1,Default location,14,available,500,50,3.0,0.9
+217,184,17470384,Juanita One Shoulder Swimsuit,1001,Bengaluru Hub,9,low_stock,500,50,2.8,0.95
+217,184,17470384,Juanita One Shoulder Swimsuit,1002,Mumbai Store,6,low_stock,500,50,3.6,0.92
+217,184,17470384,Juanita One Shoulder Swimsuit,1003,Delhi Store,4,low_stock,500,50,3.2,0.94
+218,185,19029711,Floral Print Midi Dress,1,Default location,83,available,500,50,3.0,0.9
+218,185,19029711,Floral Print Midi Dress,1001,Bengaluru Hub,52,available,500,50,2.8,0.95
+218,185,19029711,Floral Print Midi Dress,1002,Mumbai Store,41,available,500,50,3.6,0.92
+218,185,19029711,Floral Print Midi Dress,1003,Delhi Store,31,available,500,50,3.2,0.94
+220,187,20370195,Metallic Plisse Gown,1,Default location,51,available,500,50,3.0,0.9
+220,187,20370195,Metallic Plisse Gown,1001,Bengaluru Hub,32,available,500,50,2.8,0.95
+220,187,20370195,Metallic Plisse Gown,1002,Mumbai Store,25,available,500,50,3.6,0.92
+220,187,20370195,Metallic Plisse Gown,1003,Delhi Store,19,available,500,50,3.2,0.94
+221,188,20330027,Pre-Owned Ingenieur,1,Default location,79,available,500,50,3.0,0.9
+221,188,20330027,Pre-Owned Ingenieur,1001,Bengaluru Hub,49,available,500,50,2.8,0.95
+221,188,20330027,Pre-Owned Ingenieur,1002,Mumbai Store,39,available,500,50,3.6,0.92
+221,188,20330027,Pre-Owned Ingenieur,1003,Delhi Store,29,available,500,50,3.2,0.94
+222,189,19452881,2020 Pre-Owned Royal Oak Automatik (41mm),1,Default location,71,available,500,50,3.0,0.9
+222,189,19452881,2020 Pre-Owned Royal Oak Automatik (41mm),1001,Bengaluru Hub,45,available,500,50,2.8,0.95
+222,189,19452881,2020 Pre-Owned Royal Oak Automatik (41mm),1002,Mumbai Store,35,available,500,50,3.6,0.92
+222,189,19452881,2020 Pre-Owned Royal Oak Automatik (41mm),1003,Delhi Store,26,available,500,50,3.2,0.94
+223,190,14730110,Jarron Galium Geometric Pattern Vase,1,Default location,79,available,500,50,3.0,0.9
+223,190,14730110,Jarron Galium Geometric Pattern Vase,1001,Bengaluru Hub,49,available,500,50,2.8,0.95
+223,190,14730110,Jarron Galium Geometric Pattern Vase,1002,Mumbai Store,39,available,500,50,3.6,0.92
+223,190,14730110,Jarron Galium Geometric Pattern Vase,1003,Delhi Store,29,available,500,50,3.2,0.94
+225,192,19298753,Logo Print Cotton T-Shirt,1,Default location,17,available,500,50,3.0,0.9
+225,192,19298753,Logo Print Cotton T-Shirt,1001,Bengaluru Hub,11,available,500,50,2.8,0.95
+225,192,19298753,Logo Print Cotton T-Shirt,1002,Mumbai Store,8,low_stock,500,50,3.6,0.92
+225,192,19298753,Logo Print Cotton T-Shirt,1003,Delhi Store,6,low_stock,500,50,3.2,0.94
+227,194,18004408,Narrow Brim Straw Hat,1,Default location,40,available,500,50,3.0,0.9
+227,194,18004408,Narrow Brim Straw Hat,1001,Bengaluru Hub,25,available,500,50,2.8,0.95
+227,194,18004408,Narrow Brim Straw Hat,1002,Mumbai Store,19,available,500,50,3.6,0.92
+227,194,18004408,Narrow Brim Straw Hat,1003,Delhi Store,14,available,500,50,3.2,0.94
+228,195,19021212,Graphic Print Hi Top Sneakers,1,Default location,1,low_stock,500,50,3.0,0.9
+228,195,19021212,Graphic Print Hi Top Sneakers,1001,Bengaluru Hub,1,low_stock,500,50,2.8,0.95
+228,195,19021212,Graphic Print Hi Top Sneakers,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+228,195,19021212,Graphic Print Hi Top Sneakers,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+229,196,20484111,Pegasus Turbo Next Nature Sneakers,1,Default location,90,available,500,50,3.0,0.9
+229,196,20484111,Pegasus Turbo Next Nature Sneakers,1001,Bengaluru Hub,56,available,500,50,2.8,0.95
+229,196,20484111,Pegasus Turbo Next Nature Sneakers,1002,Mumbai Store,44,available,500,50,3.6,0.92
+229,196,20484111,Pegasus Turbo Next Nature Sneakers,1003,Delhi Store,33,available,500,50,3.2,0.94
+230,197,20240325,Tie Detail Leather Midi Skirt,1,Default location,48,available,500,50,3.0,0.9
+230,197,20240325,Tie Detail Leather Midi Skirt,1001,Bengaluru Hub,30,available,500,50,2.8,0.95
+230,197,20240325,Tie Detail Leather Midi Skirt,1002,Mumbai Store,23,available,500,50,3.6,0.92
+230,197,20240325,Tie Detail Leather Midi Skirt,1003,Delhi Store,17,available,500,50,3.2,0.94
+232,199,19514072,Logo Print Shorts,1,Default location,26,available,500,50,3.0,0.9
+232,199,19514072,Logo Print Shorts,1001,Bengaluru Hub,17,available,500,50,2.8,0.95
+232,199,19514072,Logo Print Shorts,1002,Mumbai Store,12,available,500,50,3.6,0.92
+232,199,19514072,Logo Print Shorts,1003,Delhi Store,9,low_stock,500,50,3.2,0.94
+233,200,19274565,Logo Print Long Sleeve Sweatshirt,1,Default location,10,low_stock,500,50,3.0,0.9
+233,200,19274565,Logo Print Long Sleeve Sweatshirt,1001,Bengaluru Hub,6,low_stock,500,50,2.8,0.95
+233,200,19274565,Logo Print Long Sleeve Sweatshirt,1002,Mumbai Store,4,low_stock,500,50,3.6,0.92
+233,200,19274565,Logo Print Long Sleeve Sweatshirt,1003,Delhi Store,3,low_stock,500,50,3.2,0.94
+234,201,19813401,Embroidered Silk Shirt,1,Default location,86,available,500,50,3.0,0.9
+234,201,19813401,Embroidered Silk Shirt,1001,Bengaluru Hub,54,available,500,50,2.8,0.95
+234,201,19813401,Embroidered Silk Shirt,1002,Mumbai Store,42,available,500,50,3.6,0.92
+234,201,19813401,Embroidered Silk Shirt,1003,Delhi Store,32,available,500,50,3.2,0.94
+235,202,14169637,Lebron 16 Four Horsemen Sneakers,1,Default location,3,low_stock,500,50,3.0,0.9
+235,202,14169637,Lebron 16 Four Horsemen Sneakers,1001,Bengaluru Hub,2,low_stock,500,50,2.8,0.95
+235,202,14169637,Lebron 16 Four Horsemen Sneakers,1002,Mumbai Store,1,low_stock,500,50,3.6,0.92
+235,202,14169637,Lebron 16 Four Horsemen Sneakers,1003,Delhi Store,1,low_stock,500,50,3.2,0.94
+236,203,20060068,Elasticated Waist Track Pants,1,Default location,32,available,500,50,3.0,0.9
+236,203,20060068,Elasticated Waist Track Pants,1001,Bengaluru Hub,20,available,500,50,2.8,0.95
+236,203,20060068,Elasticated Waist Track Pants,1002,Mumbai Store,15,available,500,50,3.6,0.92
+236,203,20060068,Elasticated Waist Track Pants,1003,Delhi Store,11,available,500,50,3.2,0.94
+237,204,19349405,Roll Neck Lame Dress,1,Default location,16,available,500,50,3.0,0.9
+237,204,19349405,Roll Neck Lame Dress,1001,Bengaluru Hub,10,low_stock,500,50,2.8,0.95
+237,204,19349405,Roll Neck Lame Dress,1002,Mumbai Store,8,low_stock,500,50,3.6,0.92
+237,204,19349405,Roll Neck Lame Dress,1003,Delhi Store,5,low_stock,500,50,3.2,0.94
+239,206,18892821,Checked Long Sleeved Shirt,1,Default location,53,available,500,50,3.0,0.9
+239,206,18892821,Checked Long Sleeved Shirt,1001,Bengaluru Hub,33,available,500,50,2.8,0.95
+239,206,18892821,Checked Long Sleeved Shirt,1002,Mumbai Store,26,available,500,50,3.6,0.92
+239,206,18892821,Checked Long Sleeved Shirt,1003,Delhi Store,19,available,500,50,3.2,0.94
+241,208,18455056,Thomas Bear Twi Tone Sweatshirt,1,Default location,26,available,500,50,3.0,0.9
+241,208,18455056,Thomas Bear Twi Tone Sweatshirt,1001,Bengaluru Hub,16,available,500,50,2.8,0.95
+241,208,18455056,Thomas Bear Twi Tone Sweatshirt,1002,Mumbai Store,12,available,500,50,3.6,0.92
+241,208,18455056,Thomas Bear Twi Tone Sweatshirt,1003,Delhi Store,9,low_stock,500,50,3.2,0.94
+242,209,19255014,Pullover Classic Hoodie,1,Default location,15,available,500,50,3.0,0.9
+242,209,19255014,Pullover Classic Hoodie,1001,Bengaluru Hub,10,low_stock,500,50,2.8,0.95
+242,209,19255014,Pullover Classic Hoodie,1002,Mumbai Store,7,low_stock,500,50,3.6,0.92
+242,209,19255014,Pullover Classic Hoodie,1003,Delhi Store,5,low_stock,500,50,3.2,0.94
+243,210,19123075,Oversized Faux Fur Gilet,1,Default location,51,available,500,50,3.0,0.9
+243,210,19123075,Oversized Faux Fur Gilet,1001,Bengaluru Hub,32,available,500,50,2.8,0.95
+243,210,19123075,Oversized Faux Fur Gilet,1002,Mumbai Store,25,available,500,50,3.6,0.92
+243,210,19123075,Oversized Faux Fur Gilet,1003,Delhi Store,18,available,500,50,3.2,0.94
+244,211,15911934,Round Neck Jumper,1,Default location,49,available,500,50,3.0,0.9
+244,211,15911934,Round Neck Jumper,1001,Bengaluru Hub,30,available,500,50,2.8,0.95
+244,211,15911934,Round Neck Jumper,1002,Mumbai Store,24,available,500,50,3.6,0.92
+244,211,15911934,Round Neck Jumper,1003,Delhi Store,18,available,500,50,3.2,0.94
+246,213,17751985,Kardes Feather Print Mini Dress,1,Default location,36,available,500,50,3.0,0.9
+246,213,17751985,Kardes Feather Print Mini Dress,1001,Bengaluru Hub,23,available,500,50,2.8,0.95
+246,213,17751985,Kardes Feather Print Mini Dress,1002,Mumbai Store,17,available,500,50,3.6,0.92
+246,213,17751985,Kardes Feather Print Mini Dress,1003,Delhi Store,13,available,500,50,3.2,0.94
+247,214,16982752,Teddy Patch Hoodie Tracksuit Set,1,Default location,80,available,500,50,3.0,0.9
+247,214,16982752,Teddy Patch Hoodie Tracksuit Set,1001,Bengaluru Hub,50,available,500,50,2.8,0.95
+247,214,16982752,Teddy Patch Hoodie Tracksuit Set,1002,Mumbai Store,40,available,500,50,3.6,0.92
+247,214,16982752,Teddy Patch Hoodie Tracksuit Set,1003,Delhi Store,30,available,500,50,3.2,0.94
+248,215,18814197,Checked Wide Leg Trousers,1,Default location,21,available,500,50,3.0,0.9
+248,215,18814197,Checked Wide Leg Trousers,1001,Bengaluru Hub,12,available,500,50,2.8,0.95
+248,215,18814197,Checked Wide Leg Trousers,1002,Mumbai Store,10,low_stock,500,50,3.6,0.92
+248,215,18814197,Checked Wide Leg Trousers,1003,Delhi Store,7,low_stock,500,50,3.2,0.94
+249,216,19092151,Logo Print Track Pants,1,Default location,61,available,500,50,3.0,0.9
+249,216,19092151,Logo Print Track Pants,1001,Bengaluru Hub,39,available,500,50,2.8,0.95
+249,216,19092151,Logo Print Track Pants,1002,Mumbai Store,30,available,500,50,3.6,0.92
+249,216,19092151,Logo Print Track Pants,1003,Delhi Store,22,available,500,50,3.2,0.94
+250,217,18650368,Logo Mania Reversible Dress,1,Default location,2,low_stock,500,50,3.0,0.9
+250,217,18650368,Logo Mania Reversible Dress,1001,Bengaluru Hub,2,low_stock,500,50,2.8,0.95
+250,217,18650368,Logo Mania Reversible Dress,1002,Mumbai Store,0,out_of_stock,500,50,3.6,0.92
+250,217,18650368,Logo Mania Reversible Dress,1003,Delhi Store,0,out_of_stock,500,50,3.2,0.94
+251,218,14486009,Sensitive Content Hoodie,1,Default location,8,low_stock,500,50,3.0,0.9
+251,218,14486009,Sensitive Content Hoodie,1001,Bengaluru Hub,5,low_stock,500,50,2.8,0.95
+251,218,14486009,Sensitive Content Hoodie,1002,Mumbai Store,4,low_stock,500,50,3.6,0.92
+251,218,14486009,Sensitive Content Hoodie,1003,Delhi Store,2,low_stock,500,50,3.2,0.94
+252,219,20068659,Tenesy Cotton Tank Top,1,Default location,23,available,500,50,3.0,0.9
+252,219,20068659,Tenesy Cotton Tank Top,1001,Bengaluru Hub,14,available,500,50,2.8,0.95
+252,219,20068659,Tenesy Cotton Tank Top,1002,Mumbai Store,11,available,500,50,3.6,0.92
+252,219,20068659,Tenesy Cotton Tank Top,1003,Delhi Store,8,low_stock,500,50,3.2,0.94
+253,220,19748412,Abstract Print Long Sleeve Blouse,1,Default location,94,available,500,50,3.0,0.9
+253,220,19748412,Abstract Print Long Sleeve Blouse,1001,Bengaluru Hub,59,available,500,50,2.8,0.95
+253,220,19748412,Abstract Print Long Sleeve Blouse,1002,Mumbai Store,46,available,500,50,3.6,0.92
+253,220,19748412,Abstract Print Long Sleeve Blouse,1003,Delhi Store,35,available,500,50,3.2,0.94
+314,281,AFN-9PM-EDP,Afnan 9PM Eau de Parfum,1,Default location,48,available,500,50,3.0,0.9
+314,281,AFN-9PM-EDP,Afnan 9PM Eau de Parfum,1001,Bengaluru Hub,30,available,500,50,2.8,0.95
+314,281,AFN-9PM-EDP,Afnan 9PM Eau de Parfum,1002,Mumbai Store,24,available,500,50,3.6,0.92
+314,281,AFN-9PM-EDP,Afnan 9PM Eau de Parfum,1003,Delhi Store,18,available,500,50,3.2,0.94
+315,282,CH-BDC-EDP,Bleu de Chanel,1,Default location,37,available,500,50,3.0,0.9
+315,282,CH-BDC-EDP,Bleu de Chanel,1001,Bengaluru Hub,22,available,500,50,2.8,0.95
+315,282,CH-BDC-EDP,Bleu de Chanel,1002,Mumbai Store,18,available,500,50,3.6,0.92
+315,282,CH-BDC-EDP,Bleu de Chanel,1003,Delhi Store,13,available,500,50,3.2,0.94
+316,283,NAU-VYG-EDT,Nautica Voyage Eau de Toilette,1,Default location,200,available,500,50,3.0,0.9
+316,283,NAU-VYG-EDT,Nautica Voyage Eau de Toilette,1001,Bengaluru Hub,125,available,500,50,2.8,0.95
+316,283,NAU-VYG-EDT,Nautica Voyage Eau de Toilette,1002,Mumbai Store,100,available,500,50,3.6,0.92
+316,283,NAU-VYG-EDT,Nautica Voyage Eau de Toilette,1003,Delhi Store,75,available,500,50,3.2,0.94
+317,284,TF-TV-EDP,Tom Ford Tobacco Vanille,1,Default location,21,available,500,50,3.0,0.9
+317,284,TF-TV-EDP,Tom Ford Tobacco Vanille,1001,Bengaluru Hub,12,available,500,50,2.8,0.95
+317,284,TF-TV-EDP,Tom Ford Tobacco Vanille,1002,Mumbai Store,10,low_stock,500,50,3.6,0.92
+317,284,TF-TV-EDP,Tom Ford Tobacco Vanille,1003,Delhi Store,7,low_stock,500,50,3.2,0.94
+318,285,VER-EROS-EDT,Versace Eros Eau de Toilette,1,Default location,61,available,500,50,3.0,0.9
+318,285,VER-EROS-EDT,Versace Eros Eau de Toilette,1001,Bengaluru Hub,37,available,500,50,2.8,0.95
+318,285,VER-EROS-EDT,Versace Eros Eau de Toilette,1002,Mumbai Store,30,available,500,50,3.6,0.92
+318,285,VER-EROS-EDT,Versace Eros Eau de Toilette,1003,Delhi Store,22,available,500,50,3.2,0.94
+319,286,JM-WSSS-COL,Jo Malone Wood Sage & Sea Salt,1,Default location,32,available,500,50,3.0,0.9
+319,286,JM-WSSS-COL,Jo Malone Wood Sage & Sea Salt,1001,Bengaluru Hub,20,available,500,50,2.8,0.95
+319,286,JM-WSSS-COL,Jo Malone Wood Sage & Sea Salt,1002,Mumbai Store,16,available,500,50,3.6,0.92
+319,286,JM-WSSS-COL,Jo Malone Wood Sage & Sea Salt,1003,Delhi Store,12,available,500,50,3.2,0.94
+320,287,GA-SI-EDP,Giorgio Armani Si,1,Default location,56,available,500,50,3.0,0.9
+320,287,GA-SI-EDP,Giorgio Armani Si,1001,Bengaluru Hub,35,available,500,50,2.8,0.95
+320,287,GA-SI-EDP,Giorgio Armani Si,1002,Mumbai Store,28,available,500,50,3.6,0.92
+320,287,GA-SI-EDP,Giorgio Armani Si,1003,Delhi Store,21,available,500,50,3.2,0.94
+321,288,CD-SVG-EDT,Dior Sauvage Eau de Toilette,1,Default location,80,available,500,50,3.0,0.9
+321,288,CD-SVG-EDT,Dior Sauvage Eau de Toilette,1001,Bengaluru Hub,50,available,500,50,2.8,0.95
+321,288,CD-SVG-EDT,Dior Sauvage Eau de Toilette,1002,Mumbai Store,40,available,500,50,3.6,0.92
+321,288,CD-SVG-EDT,Dior Sauvage Eau de Toilette,1003,Delhi Store,30,available,500,50,3.2,0.94
+322,289,ARF-CDNIM-EDT,Club de Nuit Intense Man,1,Default location,120,available,500,50,3.0,0.9
+322,289,ARF-CDNIM-EDT,Club de Nuit Intense Man,1001,Bengaluru Hub,75,available,500,50,2.8,0.95
+322,289,ARF-CDNIM-EDT,Club de Nuit Intense Man,1002,Mumbai Store,60,available,500,50,3.6,0.92
+322,289,ARF-CDNIM-EDT,Club de Nuit Intense Man,1003,Delhi Store,45,available,500,50,3.2,0.94
+323,290,LAN-LVEB-EDP,Lancôme La Vie Est Belle,1,Default location,64,available,500,50,3.0,0.9
+323,290,LAN-LVEB-EDP,Lancôme La Vie Est Belle,1001,Bengaluru Hub,40,available,500,50,2.8,0.95
+323,290,LAN-LVEB-EDP,Lancôme La Vie Est Belle,1002,Mumbai Store,32,available,500,50,3.6,0.92
+323,290,LAN-LVEB-EDP,Lancôme La Vie Est Belle,1003,Delhi Store,24,available,500,50,3.2,0.94
+324,291,DVD-CW-EDT,Davidoff Cool Water,1,Default location,72,available,500,50,3.0,0.9
+324,291,DVD-CW-EDT,Davidoff Cool Water,1001,Bengaluru Hub,45,available,500,50,2.8,0.95
+324,291,DVD-CW-EDT,Davidoff Cool Water,1002,Mumbai Store,36,available,500,50,3.6,0.92
+324,291,DVD-CW-EDT,Davidoff Cool Water,1003,Delhi Store,27,available,500,50,3.2,0.94
+325,292,CK-ONE-EDT,Calvin Klein CK One,1,Default location,101,available,500,50,3.0,0.9
+325,292,CK-ONE-EDT,Calvin Klein CK One,1001,Bengaluru Hub,62,available,500,50,2.8,0.95
+325,292,CK-ONE-EDT,Calvin Klein CK One,1002,Mumbai Store,50,available,500,50,3.6,0.92
+325,292,CK-ONE-EDT,Calvin Klein CK One,1003,Delhi Store,37,available,500,50,3.2,0.94
+326,293,CH-GG-EDP,Carolina Herrera Good Girl,1,Default location,40,available,500,50,3.0,0.9
+326,293,CH-GG-EDP,Carolina Herrera Good Girl,1001,Bengaluru Hub,25,available,500,50,2.8,0.95
+326,293,CH-GG-EDP,Carolina Herrera Good Girl,1002,Mumbai Store,20,available,500,50,3.6,0.92
+326,293,CH-GG-EDP,Carolina Herrera Good Girl,1003,Delhi Store,15,available,500,50,3.2,0.94
+327,294,PR-1M-EDT,Paco Rabanne 1 Million,1,Default location,72,available,500,50,3.0,0.9
+327,294,PR-1M-EDT,Paco Rabanne 1 Million,1001,Bengaluru Hub,45,available,500,50,2.8,0.95
+327,294,PR-1M-EDT,Paco Rabanne 1 Million,1002,Mumbai Store,36,available,500,50,3.6,0.92
+327,294,PR-1M-EDT,Paco Rabanne 1 Million,1003,Delhi Store,27,available,500,50,3.2,0.94
+328,295,MB-EXP-EDP,Montblanc Explorer,1,Default location,56,available,500,50,3.0,0.9
+328,295,MB-EXP-EDP,Montblanc Explorer,1001,Bengaluru Hub,35,available,500,50,2.8,0.95
+328,295,MB-EXP-EDP,Montblanc Explorer,1002,Mumbai Store,28,available,500,50,3.6,0.92
+328,295,MB-EXP-EDP,Montblanc Explorer,1003,Delhi Store,21,available,500,50,3.2,0.94
+329,296,GA-ADG-EDT,Acqua Di Giò Eau de Toilette,1,Default location,61,available,500,50,3.0,0.9
+329,296,GA-ADG-EDT,Acqua Di Giò Eau de Toilette,1001,Bengaluru Hub,37,available,500,50,2.8,0.95
+329,296,GA-ADG-EDT,Acqua Di Giò Eau de Toilette,1002,Mumbai Store,30,available,500,50,3.6,0.92
+329,296,GA-ADG-EDT,Acqua Di Giò Eau de Toilette,1003,Delhi Store,22,available,500,50,3.2,0.94
+330,297,HLW-MNX-EDT,Halloween Man X,1,Default location,45,available,500,50,3.0,0.9
+330,297,HLW-MNX-EDT,Halloween Man X,1001,Bengaluru Hub,27,available,500,50,2.8,0.95
+330,297,HLW-MNX-EDT,Halloween Man X,1002,Mumbai Store,22,available,500,50,3.6,0.92
+330,297,HLW-MNX-EDT,Halloween Man X,1003,Delhi Store,16,available,500,50,3.2,0.94
+331,298,JPG-LM-EDT,Jean Paul Gaultier Le Male,1,Default location,61,available,500,50,3.0,0.9
+331,298,JPG-LM-EDT,Jean Paul Gaultier Le Male,1001,Bengaluru Hub,37,available,500,50,2.8,0.95
+331,298,JPG-LM-EDT,Jean Paul Gaultier Le Male,1002,Mumbai Store,30,available,500,50,3.6,0.92
+331,298,JPG-LM-EDT,Jean Paul Gaultier Le Male,1003,Delhi Store,22,available,500,50,3.2,0.94
+332,299,GSS-SED-EDT,Guess Seductive Homme,1,Default location,80,available,500,50,3.0,0.9
+332,299,GSS-SED-EDT,Guess Seductive Homme,1001,Bengaluru Hub,50,available,500,50,2.8,0.95
+332,299,GSS-SED-EDT,Guess Seductive Homme,1002,Mumbai Store,40,available,500,50,3.6,0.92
+332,299,GSS-SED-EDT,Guess Seductive Homme,1003,Delhi Store,30,available,500,50,3.2,0.94
+333,300,YSL-LIB-EDP,Yves Saint Laurent Libre,1,Default location,47,available,500,50,3.0,0.9
+333,300,YSL-LIB-EDP,Yves Saint Laurent Libre,1001,Bengaluru Hub,28,available,500,50,2.8,0.95
+333,300,YSL-LIB-EDP,Yves Saint Laurent Libre,1002,Mumbai Store,23,available,500,50,3.6,0.92
+333,300,YSL-LIB-EDP,Yves Saint Laurent Libre,1003,Delhi Store,17,available,500,50,3.2,0.94
+334,301,BUR-TCH-EDT,Burberry Touch for Men,1,Default location,51,available,500,50,3.0,0.9
+334,301,BUR-TCH-EDT,Burberry Touch for Men,1001,Bengaluru Hub,31,available,500,50,2.8,0.95
+334,301,BUR-TCH-EDT,Burberry Touch for Men,1002,Mumbai Store,25,available,500,50,3.6,0.92
+334,301,BUR-TCH-EDT,Burberry Touch for Men,1003,Delhi Store,18,available,500,50,3.2,0.94
+335,302,DG-LB-EDT,Dolce & Gabbana Light Blue,1,Default location,80,available,500,50,3.0,0.9
+335,302,DG-LB-EDT,Dolce & Gabbana Light Blue,1001,Bengaluru Hub,50,available,500,50,2.8,0.95
+335,302,DG-LB-EDT,Dolce & Gabbana Light Blue,1002,Mumbai Store,40,available,500,50,3.6,0.92
+335,302,DG-LB-EDT,Dolce & Gabbana Light Blue,1003,Delhi Store,30,available,500,50,3.2,0.94
+336,303,GU-BLM-EDP,Gucci Bloom Eau de Parfum,1,Default location,31,available,500,50,3.0,0.9
+336,303,GU-BLM-EDP,Gucci Bloom Eau de Parfum,1001,Bengaluru Hub,18,available,500,50,2.8,0.95
+336,303,GU-BLM-EDP,Gucci Bloom Eau de Parfum,1002,Mumbai Store,15,available,500,50,3.6,0.92
+336,303,GU-BLM-EDP,Gucci Bloom Eau de Parfum,1003,Delhi Store,11,available,500,50,3.2,0.94
+337,304,HB-BOT-EDT,Hugo Boss Bottled,1,Default location,64,available,500,50,3.0,0.9
+337,304,HB-BOT-EDT,Hugo Boss Bottled,1001,Bengaluru Hub,40,available,500,50,2.8,0.95
+337,304,HB-BOT-EDT,Hugo Boss Bottled,1002,Mumbai Store,32,available,500,50,3.6,0.92
+337,304,HB-BOT-EDT,Hugo Boss Bottled,1003,Delhi Store,24,available,500,50,3.2,0.94
+338,305,VR-FB-EDP,Viktor&Rolf Flowerbomb,1,Default location,45,available,500,50,3.0,0.9
+338,305,VR-FB-EDP,Viktor&Rolf Flowerbomb,1001,Bengaluru Hub,27,available,500,50,2.8,0.95
+338,305,VR-FB-EDP,Viktor&Rolf Flowerbomb,1002,Mumbai Store,22,available,500,50,3.6,0.92
+338,305,VR-FB-EDP,Viktor&Rolf Flowerbomb,1003,Delhi Store,16,available,500,50,3.2,0.94
+339,306,LAC-WHT-EDT,Lacoste Blanc,1,Default location,56,available,500,50,3.0,0.9
+339,306,LAC-WHT-EDT,Lacoste Blanc,1001,Bengaluru Hub,35,available,500,50,2.8,0.95
+339,306,LAC-WHT-EDT,Lacoste Blanc,1002,Mumbai Store,28,available,500,50,3.6,0.92
+339,306,LAC-WHT-EDT,Lacoste Blanc,1003,Delhi Store,21,available,500,50,3.2,0.94
+340,307,AG-CLD-EDP,Ariana Grande Cloud,1,Default location,72,available,500,50,3.0,0.9
+340,307,AG-CLD-EDP,Ariana Grande Cloud,1001,Bengaluru Hub,45,available,500,50,2.8,0.95
+340,307,AG-CLD-EDP,Ariana Grande Cloud,1002,Mumbai Store,36,available,500,50,3.6,0.92
+340,307,AG-CLD-EDP,Ariana Grande Cloud,1003,Delhi Store,26,available,500,50,3.2,0.94
+341,308,AZ-WNT-EDT,Azzaro Wanted,1,Default location,53,available,500,50,3.0,0.9
+341,308,AZ-WNT-EDT,Azzaro Wanted,1001,Bengaluru Hub,32,available,500,50,2.8,0.95
+341,308,AZ-WNT-EDT,Azzaro Wanted,1002,Mumbai Store,26,available,500,50,3.6,0.92
+341,308,AZ-WNT-EDT,Azzaro Wanted,1003,Delhi Store,19,available,500,50,3.2,0.94
+342,309,VER-BC-EDT,Versace Bright Crystal,1,Default location,52,available,500,50,3.0,0.9
+342,309,VER-BC-EDT,Versace Bright Crystal,1001,Bengaluru Hub,32,available,500,50,2.8,0.95
+342,309,VER-BC-EDT,Versace Bright Crystal,1002,Mumbai Store,25,available,500,50,3.6,0.92
+342,309,VER-BC-EDT,Versace Bright Crystal,1003,Delhi Store,19,available,500,50,3.2,0.94
+343,310,CH-N5-EDP,Chanel N°5 Eau de Parfum,1,Default location,40,available,500,50,3.0,0.9
+343,310,CH-N5-EDP,Chanel N°5 Eau de Parfum,1001,Bengaluru Hub,25,available,500,50,2.8,0.95
+343,310,CH-N5-EDP,Chanel N°5 Eau de Parfum,1002,Mumbai Store,20,available,500,50,3.6,0.92
+343,310,CH-N5-EDP,Chanel N°5 Eau de Parfum,1003,Delhi Store,15,available,500,50,3.2,0.94
+344,311,18165932,logo-print pullover hoodie,1,Default location,75,available,500,50,3.0,0.9
+344,311,18165932,logo-print pullover hoodie,1001,Bengaluru Hub,46,available,500,50,2.8,0.95
+344,311,18165932,logo-print pullover hoodie,1002,Mumbai Store,37,available,500,50,3.6,0.92
+344,311,18165932,logo-print pullover hoodie,1003,Delhi Store,27,available,500,50,3.2,0.94
+345,312,19629146,graphic logo-print T-shirt,1,Default location,19,available,500,50,3.0,0.9
+345,312,19629146,graphic logo-print T-shirt,1001,Bengaluru Hub,11,available,500,50,2.8,0.95
+345,312,19629146,graphic logo-print T-shirt,1002,Mumbai Store,9,low_stock,500,50,3.6,0.92
+345,312,19629146,graphic logo-print T-shirt,1003,Delhi Store,6,low_stock,500,50,3.2,0.94

@@ -619,10 +619,11 @@ def _to_int(value, default: int = 0) -> int:
         return default
 
 
-def _history_summary(history: List[Dict], product_id: str) -> List[Dict]:
+def _history_summary(history: List[Dict], product_id: str | None) -> List[Dict]:
     grouped: Dict[int, Dict[str, List[float]]] = {}
+    use_product_filter = product_id is not None and str(product_id).strip() != ""
     for row in history:
-        if str(row.get("product_id")) != str(product_id):
+        if use_product_filter and str(row.get("product_id")) != str(product_id):
             continue
         loc_id = _to_int(row.get("location_id"), -1)
         if loc_id < 0:
@@ -720,10 +721,15 @@ def _sanitize_specialist_outputs(
     return specialist_outputs
 
 
-def _sanitize_allocations(*, llm_result: Dict, locations: List[Dict], inbound: int) -> Dict:
-    location_ids = {_to_int(loc.get("location_id"), -1) for loc in locations}
+def _sanitize_allocations(*, llm_result: Dict, locations: List[Dict], inbound: int, product_id: str) -> Dict:
+    location_meta = {
+        _to_int(loc.get("location_id"), -1): loc
+        for loc in locations
+        if _to_int(loc.get("location_id"), -1) > 0
+    }
+    location_ids = set(location_meta.keys())
     raw = llm_result.get("allocations", [])
-    decisions: List[Dict] = []
+    by_location: Dict[int, Dict] = {}
 
     if isinstance(raw, list):
         for item in raw:
@@ -735,19 +741,58 @@ def _sanitize_allocations(*, llm_result: Dict, locations: List[Dict], inbound: i
             qty = _to_int(item.get("quantity"), 0)
             rationale = str(item.get("rationale") or "LLM allocation")
             est_cost = _to_float(item.get("estimated_cost"), 0.0)
-            decisions.append(
+            if est_cost <= 0.0 and qty > 0:
+                est_cost = qty * _to_float(location_meta[loc_id].get("shipping_cost"), 0.0)
+
+            row = by_location.setdefault(
+                loc_id,
                 {
+                    "product_id": str(product_id),
                     "location_id": loc_id,
-                    "quantity": qty,
-                    "rationale": rationale,
-                    "estimated_cost": round(max(est_cost, 0.0), 2),
-                }
+                    "quantity": 0,
+                    "rationale": "LLM allocation",
+                    "estimated_cost": 0.0,
+                },
             )
+            row["quantity"] += qty
+            if rationale and row["rationale"] == "LLM allocation":
+                row["rationale"] = rationale
+            row["estimated_cost"] += max(est_cost, 0.0)
+
+    decisions: List[Dict] = sorted(by_location.values(), key=lambda x: _to_int(x.get("location_id"), 0))
+
+    positive_total = sum(max(0, _to_int(d.get("quantity"), 0)) for d in decisions)
+    if inbound >= 0 and positive_total > inbound and positive_total > 0:
+        # Scale positive allocations down proportionally so total inbound assigned never exceeds inbound.
+        scaled_rows = []
+        scaled_used = 0
+        for decision in decisions:
+            qty = max(_to_int(decision.get("quantity"), 0), 0)
+            if qty <= 0:
+                continue
+            exact = (qty * inbound) / positive_total
+            base_qty = int(exact)
+            fraction = exact - base_qty
+            scaled_rows.append((fraction, decision, qty, base_qty))
+            scaled_used += base_qty
+
+        remaining = max(inbound - scaled_used, 0)
+        scaled_rows.sort(key=lambda x: (x[0], -_to_int(x[1].get("location_id"), 0)), reverse=True)
+
+        for idx, (_, decision, old_qty, new_qty) in enumerate(scaled_rows):
+            if idx < remaining:
+                new_qty += 1
+            if old_qty > 0:
+                decision["estimated_cost"] = _to_float(decision.get("estimated_cost"), 0.0) * (new_qty / old_qty)
+            decision["quantity"] = new_qty
 
     inbound_used = sum(max(0, int(d["quantity"])) for d in decisions)
     inbound_remaining = max(inbound - inbound_used, 0)
 
     total_cost = sum(_to_float(d.get("estimated_cost"), 0.0) for d in decisions)
+    for decision in decisions:
+        decision["estimated_cost"] = round(max(_to_float(decision.get("estimated_cost"), 0.0), 0.0), 2)
+
     fill_rate = _to_float(llm_result.get("fill_rate"), -1.0)
     if fill_rate < 0.0:
         fill_rate = 0.0
@@ -829,8 +874,14 @@ def run_rag_orchestrated_pipeline(
 
     cfg = _load_config()
     summary = _history_summary(history, product_id)
+    summary_fallback_used = False
     if not summary:
-        raise ValueError("No history rows matched product_id for RAG pipeline.")
+        # Fallback: use any available history when specific product rows are missing.
+        # This keeps the pipeline usable when source APIs have not yet synced that SKU.
+        summary = _history_summary(history, None)
+        summary_fallback_used = bool(summary)
+    if not summary:
+        raise ValueError("No usable history rows found for RAG pipeline.")
 
     retrieved_rows = chroma_memory.query_similar_runs(
         product_id=product_id,
@@ -847,6 +898,13 @@ def run_rag_orchestrated_pipeline(
         locations=locations,
         similar_cases=retrieved_rows,
     )
+    if summary_fallback_used:
+        retrieval_context["warnings"] = [
+            (
+                f"No history rows matched product_id={product_id}; "
+                "used available cross-product history as fallback."
+            )
+        ]
 
     forecast_system = (
         "You are a forecasting specialist in a Retrieval-Augmented Generation (RAG) pipeline. "
@@ -920,6 +978,7 @@ def run_rag_orchestrated_pipeline(
         llm_result=allocation_raw,
         locations=enriched_locations,
         inbound=inbound,
+        product_id=product_id,
     )
 
     chroma_memory.upsert_run_memory(

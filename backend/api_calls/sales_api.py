@@ -16,6 +16,31 @@ def _to_int(text: str, default: int) -> int:
         return default
 
 
+def _parse_product_ids(query: Dict[str, List[str]]) -> List[int]:
+    raw_values = query.get("product_ids", [])
+    parsed: List[int] = []
+
+    for raw in raw_values:
+        for token in str(raw).split(","):
+            token = token.strip()
+            if not token:
+                continue
+            value = _to_int(token, -1)
+            if value > 0:
+                parsed.append(value)
+
+    # Preserve order and remove duplicates.
+    unique: List[int] = []
+    seen = set()
+    for value in parsed:
+        if value in seen:
+            continue
+        seen.add(value)
+        unique.append(value)
+
+    return unique
+
+
 def _generate_notebook_like_sales(url: str) -> List[Dict]:
     parsed = urlparse(url)
     query = parse_qs(parsed.query)
@@ -23,6 +48,7 @@ def _generate_notebook_like_sales(url: str) -> List[Dict]:
     seed = _to_int((query.get("seed", ["42"])[0] or "42"), 42)
     days = max(_to_int((query.get("days", ["14"])[0] or "14"), 14), 1)
     product_count = max(_to_int((query.get("products", ["5"])[0] or "5"), 5), 1)
+    explicit_product_ids = _parse_product_ids(query)
 
     rng = random.Random(seed)
     end = datetime.today().date()
@@ -42,7 +68,9 @@ def _generate_notebook_like_sales(url: str) -> List[Dict]:
     }
 
     rows: List[Dict] = []
-    for product_id in range(1, product_count + 1):
+    product_ids = explicit_product_ids or list(range(1, product_count + 1))
+
+    for product_id in product_ids:
         sku = f"SKU-00{product_id}"
         for location_id, coord in location_coordinates.items():
             baseline = rng.randint(5, 20)

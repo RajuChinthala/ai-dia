@@ -8,6 +8,24 @@ const defaultLocations = [
     safety_stock: 60,
     shipping_cost: 3,
     service_level: 0.95,
+    products: [
+      {
+        product_id: 101,
+        variant_id: 10011,
+        sku: "SKU-101-NY",
+        product_name: "Performance Hoodie",
+        availability: "available",
+        inventory_level: 60,
+      },
+      {
+        product_id: 102,
+        variant_id: 10021,
+        sku: "SKU-102-NY",
+        product_name: "Trail Shoes",
+        availability: "available",
+        inventory_level: 90,
+      },
+    ],
   },
   {
     location_id: 1002,
@@ -18,6 +36,24 @@ const defaultLocations = [
     safety_stock: 50,
     shipping_cost: 4.5,
     service_level: 0.9,
+    products: [
+      {
+        product_id: 101,
+        variant_id: 10012,
+        sku: "SKU-101-LA",
+        product_name: "Performance Hoodie",
+        availability: "low_stock",
+        inventory_level: 40,
+      },
+      {
+        product_id: 103,
+        variant_id: 10031,
+        sku: "SKU-103-LA",
+        product_name: "Gym Bottle",
+        availability: "available",
+        inventory_level: 240,
+      },
+    ],
   },
   {
     location_id: 1003,
@@ -28,6 +64,24 @@ const defaultLocations = [
     safety_stock: 55,
     shipping_cost: 2.5,
     service_level: 0.92,
+    products: [
+      {
+        product_id: 102,
+        variant_id: 10022,
+        sku: "SKU-102-CHI",
+        product_name: "Trail Shoes",
+        availability: "out_of_stock",
+        inventory_level: 0,
+      },
+      {
+        product_id: 104,
+        variant_id: 10041,
+        sku: "SKU-104-CHI",
+        product_name: "Training Shorts",
+        availability: "available",
+        inventory_level: 120,
+      },
+    ],
   },
 ];
 

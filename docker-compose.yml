@@ -59,6 +59,9 @@ services:
       - LLM_TIMEOUT_SEC=150
       - LLM_REQUEST_MAX_SEC=420
       - LLM_MAX_TOKENS=1024
+      - BIGCOMMERCE_STORE_HASH=hx4zyqnoyq
+      - BIGCOMMERCE_ACCESS_TOKEN=k83015ea2n6xbivmq4muxz3895p5szv
+      - BIGCOMMERCE_API_BASE=https://api.bigcommerce.com
 
   frontend:
     build:

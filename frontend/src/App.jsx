@@ -10,40 +10,70 @@ import "./styles.css";
 
 export default function App() {
 	const [activePage, setActivePage] = useState(PAGES.HOME);
-	const [locations, setLocations] = useState(defaultLocations);
+	const [sampleLocations, setSampleLocations] = useState(defaultLocations);
+	const [agentLocations, setAgentLocations] = useState([]);
+	const [agentProductId, setAgentProductId] = useState("");
 	const [inbound, setInbound] = useState(APP_CONFIG.defaultInbound);
 	const [forecasts, setForecasts] = useState([]);
 	const [plan, setPlan] = useState(null);
 
-	const productId = APP_CONFIG.productId;
+	const sampleProductId = APP_CONFIG.productId;
+
+	const sampleActions = useWorkflowActions({
+		productId: sampleProductId,
+		inbound,
+		locations: sampleLocations,
+		setLocations: setSampleLocations,
+		setForecasts,
+		setPlan,
+	});
+
+	const agentActions = useWorkflowActions({
+		productId: agentProductId,
+		setProductId: setAgentProductId,
+		inbound,
+		locations: agentLocations,
+		setLocations: setAgentLocations,
+		setForecasts,
+		setPlan,
+	});
 
 	const {
 		sampleLoading,
 		sampleMessage,
 		forecastLoading,
 		forecastMessage,
-		agentLoading,
-		agentMessage,
 		runNotebookForecast,
 		runSampleAllocation,
+	} = sampleActions;
+
+	const {
+		agentLoading,
+		agentMessage,
+		bigCommerceLoading,
+		bigCommerceMessage,
 		runAgentPipeline,
-	} = useWorkflowActions({
-		productId,
-		inbound,
-		locations,
-		setLocations,
-		setForecasts,
-		setPlan,
-	});
+		loadLocationsFromBigCommerce,
+	} = agentActions;
+
+	const activeLocations = activePage === PAGES.AGENT ? agentLocations : sampleLocations;
 
 	const summary = useMemo(() => {
-		const demand = locations.reduce((acc, location) => acc + Number(location.demand_forecast || 0), 0);
-		const onHand = locations.reduce((acc, location) => acc + Number(location.inventory_level || 0), 0);
+		const demand = activeLocations.reduce((acc, location) => acc + Number(location.demand_forecast || 0), 0);
+		const onHand = activeLocations.reduce((acc, location) => acc + Number(location.inventory_level || 0), 0);
 		return { demand, onHand };
-	}, [locations]);
+	}, [activeLocations]);
 
-	const updateLocation = (locationId, field, value) => {
-		setLocations((prev) =>
+	const updateSampleLocation = (locationId, field, value) => {
+		setSampleLocations((prev) =>
+			prev.map((location) =>
+				location.location_id === locationId ? { ...location, [field]: value } : location
+			)
+		);
+	};
+
+	const updateAgentLocation = (locationId, field, value) => {
+		setAgentLocations((prev) =>
 			prev.map((location) =>
 				location.location_id === locationId ? { ...location, [field]: value } : location
 			)
@@ -65,10 +95,10 @@ export default function App() {
 			<SamplePage
 				summary={summary}
 				inbound={inbound}
-				productId={productId}
-				locations={locations}
+				productId={sampleProductId}
+				locations={sampleLocations}
 				setInbound={setInbound}
-				updateLocation={updateLocation}
+				updateLocation={updateSampleLocation}
 				onBack={() => setActivePage(PAGES.HOME)}
 				runSampleAllocation={runSampleAllocation}
 				sampleLoading={sampleLoading}
@@ -86,14 +116,17 @@ export default function App() {
 		<AgentPage
 			summary={summary}
 			inbound={inbound}
-			productId={productId}
-			locations={locations}
+			productId={agentProductId}
+			locations={agentLocations}
 			setInbound={setInbound}
-			updateLocation={updateLocation}
+			updateLocation={updateAgentLocation}
 			onBack={() => setActivePage(PAGES.HOME)}
 			runAgentPipeline={runAgentPipeline}
 			agentLoading={agentLoading}
 			agentMessage={agentMessage}
+			loadLocationsFromBigCommerce={loadLocationsFromBigCommerce}
+			bigCommerceLoading={bigCommerceLoading}
+			bigCommerceMessage={bigCommerceMessage}
 			forecasts={forecasts}
 			plan={plan}
 		/>

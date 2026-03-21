@@ -138,6 +138,7 @@ class AgentSignals(BaseModel):
 class AgentPipelineResponse(BaseModel):
     product_id: str
     variant_id: Optional[int] = None
+    history_source: Optional[str] = None
     horizon: int
     allocation_mode: str
     specialist_outputs: List[AgentSignals]
@@ -146,3 +147,51 @@ class AgentPipelineResponse(BaseModel):
     estimated_total_cost: float
     fill_rate: float
     retrieval_context: Optional[Dict] = None
+
+
+class BigCommerceProductLocation(BaseModel):
+    location_id: int
+    location_name: str
+    inventory_level: int
+    availability: str
+    capacity: int
+    safety_stock: int
+    shipping_cost: float
+    service_level: float
+
+
+class BigCommerceProductWithLocations(BaseModel):
+    product_id: int
+    variant_id: Optional[int] = None
+    sku: str
+    product_name: str
+    total_inventory_level: int
+    locations: List[BigCommerceProductLocation]
+
+
+class BigCommerceProductsLocationsResponse(BaseModel):
+    source: str
+    product_count: int
+    products: List[BigCommerceProductWithLocations]
+
+
+class BigCommerceAllocationPayloadResponse(BaseModel):
+    source: str
+    selected_product: BigCommerceProductWithLocations
+    allocation_payload: AllocationRequest
+
+
+class BigCommerceSalesHistoryRow(BaseModel):
+    date: str
+    product_id: str
+    location_id: int
+    units: float
+
+
+class BigCommerceSalesHistoryResponse(BaseModel):
+    source: str
+    row_count: int
+    orders_processed: int
+    orders_total: int
+    notes: List[str] = Field(default_factory=list)
+    rows: List[BigCommerceSalesHistoryRow]

@@ -13,6 +13,7 @@ export default function AllocationTable({ plan }) {
       <table className="allocation-table">
         <thead>
           <tr>
+            <th>Product</th>
             <th>Location</th>
             <th>Qty</th>
             <th>Rationale</th>
@@ -22,6 +23,7 @@ export default function AllocationTable({ plan }) {
         <tbody>
           {plan.allocations.map((row, idx) => (
             <tr key={idx}>
+              <td>{row.product_id ?? plan.product_id ?? "-"}</td>
               <td>{row.location_id}</td>
               <td style={{ color: row.quantity < 0 ? "#f59e0b" : "#22d3ee" }}>{row.quantity}</td>
               <td>{row.rationale}</td>

@@ -152,10 +152,13 @@ Useful commands:
 docker compose down
 docker compose down -v
 docker compose restart api
+docker compose up -d --build api
 ```
 
 - `down` keeps Chroma data volume.
 - `down -v` removes persisted Chroma data.
+- `restart api` restarts the existing container image only.
+- Use `up -d --build api` after backend code changes to apply new code into the container.
 
 ## Notes
 
@@ -163,6 +166,56 @@ docker compose restart api
 - Optimizer combines forecasted demand + safety stock with shipping cost, capacity, and service level to produce allocations. Positive qty = ship in, negative qty = transfer out.
 - For production usage, send real merged history rows (`units`, `weather_score`, `social_signal`) through `/pipeline/agent_forecast_allocate`.
 - The updated notebook can call `/pipeline/notebook_forecast` to execute and standardize forecast outputs in CSV form.
+
+## BigCommerce integration
+
+The backend now supports a canonical inventory planning payload shape:
+
+- **Canonical model**: `product -> locations`
+
+### Endpoint
+
+- `GET /pipeline/bigcommerce/products_locations`
+- Backward-compatible alias: `GET /pipeline/bigcommerce/locations_products`
+- `GET /pipeline/bigcommerce/allocation_payload` (returns `AllocationRequest`-ready payload for selected product)
+
+Optional query params:
+
+- `product_ids=101,102`
+- `location_ids=1,2`
+- `timeout_sec`
+- `retry_max`
+- `retry_backoff_sec`
+- `max_pages`
+- `products_per_location`
+- `include_csv_data=true|false` (default `true`)
+- `location_products_csv_path=notebooks/location_products.csv` (optional override)
+
+CSV augmentation behavior:
+
+- Backend reads `notebooks/location_products.csv` by default (or `LOCATION_PRODUCTS_CSV_PATH` env var).
+- `notebooks/location_products.csv` is kept as an exact mirror of BigCommerce location-product rows.
+- For demos, use `notebooks/location_products_simulated.csv` to simulate multiple locations while preserving the mirror file.
+- CSV rows are expected in the same canonical shape used by BigCommerce output:
+  - `product_id, variant_id, sku, product_name, location_id, location_name, inventory_level, availability, capacity, safety_stock, shipping_cost, service_level`
+- CSV rows are merged with BigCommerce API rows by `(product_id, variant_id, location_id)`.
+- When the same row exists in both sources, CSV values take precedence, which lets you enrich or override location metadata.
+
+Response highlights:
+
+- `products[]` where each product includes `locations[]`
+- `product_count`
+- `allocation_payload` endpoint includes:
+  - `selected_product`
+  - `allocation_payload` with `product_id`, `variant_id`, `inbound`, `locations[]`
+
+This structure is used by the Agent UI loader to choose a product and derive the editable location allocation table.
+
+### Required env vars
+
+- `BIGCOMMERCE_STORE_HASH`
+- `BIGCOMMERCE_ACCESS_TOKEN`
+- `BIGCOMMERCE_API_BASE=https://api.bigcommerce.com`
 
 ## Agent orchestration pattern
 
